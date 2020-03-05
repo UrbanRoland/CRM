@@ -1,1 +1,62 @@
-<mxfile host="www.draw.io" modified="2020-03-05T15:17:06.759Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="jJh-gs04AKTLo6ds8tPe" version="12.8.0" type="github"><diagram id="tKgVSa2ZyaZ9d1Cx3sKG" name="Page-1">7VptU+IwEP41/ahDGgr2I6DozXijM9zcqd9iG9toaLiQysuvvw1N6QsVUUDpKV/IbpJNsnny7CZg4d5wei7JKPwpfMotu+FPLXxq2baNGm340ppZokGubTSBZL7RZYoBm1OjbBhtzHw6LjRUQnDFRkWlJ6KIeqqgI1KKSbHZg+DFUUckoCuKgUf4qvYP81WYaE/SVWj9BWVBmI6MWm5SMyRpY7OScUh8Mcmp8JmFe1IIlZSG0x7l2nupX5J+/RdqlxOTNFKbdLgKZvNwIH5cxeTOdVrjq8753ZGx8kx4bBZs2S0O9roPAszCrNXMuKL1N9ZT7T5TqRg46IhwFkQW7ugxopBKprJGUArM9w6t3dNHymG5T3Ru9bDVccepfVh2MkRx2BW1XZiEDR4CIIHQnYRM0cGIeLpmAmAGXaiGHCS07KknS6cv+h8tdxXOAxVDquQMmqSHoWGAYI7CUcvIkwxXKAVLmMPUidERA+VgaTrbbSiYDX/D5ttVu1/2kA/HwYhCqlAEIiL8LNN2pYgjn+pxGiBlbS6FGBnvPVKlZuZsk1iJom9p5Hf0SQXxngvvKVH1mV7MwiadMnWTK9/q8jEufUzl6TTX8nSWE64BVOA4KlNdBE68WU4ChJcN69rM8kKa5aWy7cSP2nnr0QK+FrH06LpdMqxHZEDVuqPcqoafpJwo9lycSBWWTNdrwRZndZrC1D12c592u4hiXF2dDpBM29gs4XU5yS0gXCv+0qTl9oKZdsaCv4DGHMtFW7IYRJaRLsZD3vGUkLlpXZJ7yq/FmCkmIn3AhFJiCA24rugS7ylYnN+e4LofWMMPi0/ORidZ2akSJVIUseIsor1l6M2QvxVTohJRtleJElfwZGtfPNk+DJr8WBZ0XqG9HTIc3pDhnL0QnOMW4YbK8XbPFIZrRWEdn6j7BXmhOds2/frfiKvVLkHJ+WTmcmqFLQLYEk/QAvJ7uEcmGT6tUYrfLO2/u2GGv7f9R+6XCF25aHVbCFZvyNhfvYXsMOCdHHZKv4LHPUfAk1qx1CFb+w3Eqd53p/gO5GtuIFVM/qGB3K7KEr/OU80OuRfh/XAqsp3q3O+DSBTV6x7Rp4+cjufvJKuvRT8Ifzb7VN0jvg77ZHlm8YnkwB6KUfOg00rc/mBCbNaKEH9pNtS33m8+fI0PcfOT+RDV613lgkgfOoznVH4DbBOAOZ/9i0PC0LUBWJ/ykIznUfIuvHi56+JviBUglt0h95/VgZj9rySJp9nfc/DZPw==</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-03-05T15:17:42.057Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="9JcB2FNL2VXhVyfG7rEv" version="12.8.0" type="github">
+  <diagram id="tKgVSa2ZyaZ9d1Cx3sKG" name="Page-1">
+    <mxGraphModel dx="1595" dy="1624" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-1" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;bejelentkezés&lt;/font&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="-60" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-2" target="OgyzhSoIOuaZ956sOAGZ-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-69.99999999999977" y="-39.99999999999977" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-2" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Ügyintéző&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="-70" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-3" target="OgyzhSoIOuaZ956sOAGZ-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-3" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Adatbázis&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="670" y="150" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-5" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;adatok kezelése&lt;/font&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="470" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=block;endFill=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-8" target="OgyzhSoIOuaZ956sOAGZ-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-69.99999999999977" y="-260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-8" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Vezető&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="-290" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-125" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-13" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Fejlesztő&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="130" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-14" target="OgyzhSoIOuaZ956sOAGZ-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-69.99999999999977" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-14" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Tesztelő&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="340" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-15" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Hardverszerelő&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="570" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OgyzhSoIOuaZ956sOAGZ-16" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Felhasználó&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="-290" y="130" width="30" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
