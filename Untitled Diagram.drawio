@@ -1,6 +1,6 @@
-<mxfile host="www.draw.io" modified="2020-03-07T12:23:30.957Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="WSdVYXwsKXGIt7fmqKb-" version="12.8.1" type="github">
+<mxfile host="www.draw.io" modified="2020-03-10T10:55:32.338Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36" etag="ta1UFsSphcSZaT2SsX77" version="12.8.1" type="github">
   <diagram id="tKgVSa2ZyaZ9d1Cx3sKG" name="Page-1">
-    <mxGraphModel dx="2747" dy="2307" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1134" dy="1351" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -19,8 +19,14 @@
             <mxPoint x="380" y="-690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-59" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0;exitY=0;exitDx=0;exitDy=0;startArrow=open;startFill=0;dashed=1;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-1" target="h7KGCQ8kjtkjl8msQsjL-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-1" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;felhasználó azonosítása&lt;/font&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="320" y="-610" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-58" value="kijelentkezés" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-800" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-2" target="OgyzhSoIOuaZ956sOAGZ-16" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -39,6 +45,11 @@
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-2" target="h7KGCQ8kjtkjl8msQsjL-32">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="120" y="-40.00000000000023" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-2" target="h7KGCQ8kjtkjl8msQsjL-42">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="70" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-2" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Ügyintéző&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
@@ -75,12 +86,22 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-8" target="h7KGCQ8kjtkjl8msQsjL-42">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="-149.99999999999977" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-8" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Vezető&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="10" y="-290" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-13" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-125" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-13" target="h7KGCQ8kjtkjl8msQsjL-42">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-13" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Fejlesztő&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
@@ -98,11 +119,6 @@
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-14" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Tesztelő&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="10" y="340" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="h7KGCQ8kjtkjl8msQsjL-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-15" target="h7KGCQ8kjtkjl8msQsjL-22">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="120" y="600" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-15" target="OgyzhSoIOuaZ956sOAGZ-16">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-420" y="310" as="targetPoint" />
@@ -119,8 +135,17 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="170" y="290" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-550" y="150" />
-              <mxPoint x="-550" y="-570" />
+              <mxPoint x="-420" y="150" />
+              <mxPoint x="-420" y="-570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-16" target="h7KGCQ8kjtkjl8msQsjL-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-369.9999999999998" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-420" y="150" />
+              <mxPoint x="-420" y="650" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -196,7 +221,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-22" value="hibajegyek elemzése" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="220" y="630" width="130" height="60" as="geometry" />
+          <mxGeometry x="-490" y="680" width="130" height="60" as="geometry" />
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-29" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="h7KGCQ8kjtkjl8msQsjL-27" target="h7KGCQ8kjtkjl8msQsjL-22">
           <mxGeometry relative="1" as="geometry">
@@ -204,7 +229,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-27" value="hibajegyek lezárása" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="180" y="750" width="120" height="50" as="geometry" />
+          <mxGeometry x="-290" y="750" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-37" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;dashed=1;entryX=0;entryY=0.333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="h7KGCQ8kjtkjl8msQsjL-32" target="OgyzhSoIOuaZ956sOAGZ-5">
           <mxGeometry relative="1" as="geometry">
@@ -217,6 +242,18 @@
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-32" value="hibajegyek kezelése" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="300" y="-190" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-46" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="h7KGCQ8kjtkjl8msQsjL-42" target="OgyzhSoIOuaZ956sOAGZ-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365" y="180" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="223" y="230" />
+              <mxPoint x="948" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h7KGCQ8kjtkjl8msQsjL-42" value="hibajegy továbbítása" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="150" width="125" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
