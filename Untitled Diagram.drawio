@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-03-14T14:30:18.191Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36" etag="1s4f2FYDvuNOzpSboO8P" version="12.8.4" type="github">
+<mxfile host="app.diagrams.net" modified="2020-03-14T14:41:11.261Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36" etag="W7lrY9DxrAwsFso13nm9" version="12.8.4" type="github">
   <diagram id="tKgVSa2ZyaZ9d1Cx3sKG" name="Page-1">
-    <mxGraphModel dx="2391" dy="2107" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2130" dy="1951" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -57,6 +57,14 @@
             <mxPoint x="25" y="70" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-2" target="GiQxV7Go3dVCYtoei7Or-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="-150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="625" y="-50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-2" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Ügyintéző&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="10" y="-70" width="30" height="60" as="geometry" />
         </mxCell>
@@ -94,6 +102,11 @@
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="OgyzhSoIOuaZ956sOAGZ-8" target="h7KGCQ8kjtkjl8msQsjL-42" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="25" y="-149.99999999999977" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OgyzhSoIOuaZ956sOAGZ-8" target="GiQxV7Go3dVCYtoei7Or-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="-150" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-8" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Vezető&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
@@ -153,6 +166,12 @@
               <mxPoint x="-420" y="150" />
               <mxPoint x="-420" y="650" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" edge="1" parent="1" target="GiQxV7Go3dVCYtoei7Or-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-420" y="150" as="sourcePoint" />
+            <mxPoint x="-370" y="160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="OgyzhSoIOuaZ956sOAGZ-16" value="&lt;font style=&quot;vertical-align: inherit&quot;&gt;&lt;font style=&quot;vertical-align: inherit&quot;&gt;Felhasználó&lt;/font&gt;&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
@@ -227,7 +246,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-22" value="hibajegyek elemzése" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-490" y="680" width="130" height="60" as="geometry" />
+          <mxGeometry x="-360" y="630" width="130" height="60" as="geometry" />
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-29" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="1" source="h7KGCQ8kjtkjl8msQsjL-27" target="h7KGCQ8kjtkjl8msQsjL-22" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -235,7 +254,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-27" value="hibajegyek lezárása" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-290" y="750" width="120" height="50" as="geometry" />
+          <mxGeometry x="-140" y="670" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-37" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;dashed=1;entryX=0;entryY=0.333;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="h7KGCQ8kjtkjl8msQsjL-32" target="OgyzhSoIOuaZ956sOAGZ-5" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -260,6 +279,26 @@
         </mxCell>
         <mxCell id="h7KGCQ8kjtkjl8msQsjL-42" value="hibajegy továbbítása" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="160" y="150" width="125" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-16" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;dashed=1;" edge="1" parent="1" source="GiQxV7Go3dVCYtoei7Or-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="-105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-5" value="keresés az ügyfelek között" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="-130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;entryX=1;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="GiQxV7Go3dVCYtoei7Or-6" target="OgyzhSoIOuaZ956sOAGZ-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-560" y="249.99999999999955" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-560" y="750" />
+              <mxPoint x="1032" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GiQxV7Go3dVCYtoei7Or-6" value="keresés a hibajegyek között" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-640" y="120" width="160" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
