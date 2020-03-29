@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
+	<title>Registration</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -9,7 +9,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ <link rel="stylesheet"  type="text/css" href="css/style.css">
 
 </head>
 <body>
@@ -58,6 +59,20 @@
 						</span>
 					</div>
 					
+					<div class="wrap-input100 validate-input" data-validate = "Jelszó szükséges">
+									
+					 <span class="dropdown-el">
+					 	
+    <input type="radio" name="sortType" value="Relevance" checked="checked" id="sort-relevance"><label for="sort-relevance">Vezető</label>
+    <input type="radio" name="sortType" value="Popularity" id="sort-best"><label for="sort-best">Ügyfélszolgálat</label>
+    <input type="radio" name="sortType" value="PriceIncreasing" id="sort-low"><label for="sort-low">Fejlesztő</label>
+    <input type="radio" name="sortType" value="PriceDecreasing" id="sort-high"><label for="sort-high">Teszterlő</label>
+    <input type="radio" name="sortType" value="ProductBrand" id="sort-brand"><label for="sort-brand">Hardverszerelő</label>
+	
+  </span>
+
+				</div>
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Küldés
@@ -85,7 +100,6 @@
 	</div>
 	
 	
-
 	
 <!--===============================================================================================-->	
 	<script src="jquery/jquery-3.2.1.min.js"></script>
@@ -95,6 +109,7 @@
 	<script src="js/passValidate.js"></script>
 <!--===============================================================================================-->
 	<script src="https://kit.fontawesome.com/05243c2d3d.js" crossorigin="anonymous"></script>
+ <script src="js/index.js"></script>
 
 </body>
 </html>
