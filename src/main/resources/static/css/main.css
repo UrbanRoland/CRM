@@ -45,7 +45,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+    color: #57b846;
 }
 
 /*---------------------------------------------*/
@@ -132,20 +132,11 @@ iframe {
   font-size: 13px;
   line-height: 1.5;
   color: #666666;
-  position: relative;
-  bottom: -120px;
-  left: 100px;
+ 
 }
-
-.txt3 {
-  font-family: 'Hind Siliguri', sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #666666;
-  position: relative;
-  bottom: -100px;
-  left: 100px;
-}
+.p-t-12 {padding-top: 12px;}
+.p-t-136 {padding-top: 80px;}
+.text-center {text-align: center;}
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -208,7 +199,7 @@ iframe {
 }
 
 /*------------------------------------------------------------------
-[  ]*/
+[ Picture ]*/
 .login100-pic {
   width: 316px;
   position: relative;
@@ -218,6 +209,16 @@ iframe {
 .login100-pic img {
   max-width: 100%;
 }
+.login100-picReg {
+  width: 316px;
+  position: relative;
+  bottom: 20px;
+}
+
+.login100-picReg img {
+  max-width: 100%;
+}
+
 
 
 /*------------------------------------------------------------------
@@ -262,6 +263,7 @@ iframe {
   border-radius: 25px;
   padding: 0 30px 0 68px;
 }
+
 
 
 /*------------------------------------------------------------------
@@ -385,7 +387,9 @@ iframe {
   .login100-pic {
     width: 35%;
   }
-
+  .login100-picReg {
+    width: 35%;
+  }
   .login100-form {
     width: 50%;
   }
@@ -396,7 +400,7 @@ iframe {
     padding: 100px 80px 33px 80px;
   }
 
-  .login100-pic {
+  .login100-picReg {
     display: none;
   }
 
@@ -478,3 +482,5 @@ iframe {
     opacity: 1;
   } 
 }
+
+
