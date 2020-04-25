@@ -219,7 +219,14 @@ iframe {
   max-width: 100%;
 }
 
-
+.login100-picForgetPassword {
+  width: 316px;
+  position: relative;
+  bottom: 20px;
+}
+.login100-picForgetPassword img {
+  max-width: 100%;
+}
 
 /*------------------------------------------------------------------
 [  ]*/
@@ -422,7 +429,9 @@ iframe {
 .validate-input {
   position: relative;
 }
-
+.validate-input2 {
+  position: relative;
+}
 .alert-validate::before {
   content: attr(data-validate);
   position: absolute;
