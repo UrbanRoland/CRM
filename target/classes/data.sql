@@ -1,1 +1,0 @@
-insert into users(email,password,username) values('urolir@gmail.com','asd','Roland')
