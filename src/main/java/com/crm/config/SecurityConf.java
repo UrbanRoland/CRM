@@ -33,6 +33,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.regexMatchers(".*\\.css$").permitAll()
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/forgetPassword").permitAll()
+				.antMatchers("/errorPages/404").permitAll()
+				.antMatchers("/errorPages/detaildError").permitAll()
 				.antMatchers("/images/**").permitAll()
 				.antMatchers("/db/**").permitAll()
 				.regexMatchers(".*\\.js$").permitAll()
@@ -50,7 +52,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/login?logout")
 				.permitAll();
 		
-		//ezeket szed a vegen majd ki
+		//ezek csak tesztelesre kellenek
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 		
