@@ -4,16 +4,21 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.crm.domain.Role;
 import com.crm.domain.User;
 
-public class UserDetailsImpl implements UserDetails {
+
+public class UserDetailsImpl implements UserDetails{
+
 
 	private static final long serialVersionUID = 3185970362329652822L;
 
@@ -35,9 +40,11 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		return encoder.encode(this.user.getPassword());
-		//return user.getPassword();
+		
+	
+		
+		return user.getPassword();
+	
 	
 	}
 
@@ -63,7 +70,9 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return user.getEnabled();
 	}
+
+	
 
 }

@@ -20,10 +20,12 @@
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -40,32 +42,47 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        <!-- Biztonságért felelős -->
+		
+		<!-- Biztonsagert felelos -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!--Relációs adatok kezelésére -->
+		
+		<!--Relacios adatok kezelesere -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- Bépített adatbázis -->
-	 <!--  	<dependency>
+		<!-- Bepitett adatbazis -->
+ <!--	<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 -->
-		<!-- Ez a Heroku-hoz fog majd kelleni -->
-	 <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
-			<scope>runtime</scope> </dependency> <dependency> <groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-starter-data-jpa</artifactId> </dependency> 
-			
-			
+		<!-- postgresql adatbazis -->
+			<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	
-			
+		 
+		 <!-- JPA orm -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+
+	<!--Email kuldeshez  -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
 	</dependencies>
 
 
@@ -75,7 +92,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
 		</plugins>
 	</build>
 

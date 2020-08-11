@@ -1,5 +1,6 @@
 package com.crm.domain;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table( name="users" )
@@ -27,9 +29,21 @@ public class User {
 	private String email;
 	
 	@Column( nullable=false )
+	//@Size(min=5, message = "A jelszónak legalább 5 karaktert kell tartalmaznia!")
 	private String password;
 	
+	private String passwordConf;
+	
+	@Column( nullable=false )
 	private String username;
+	
+	private String activation;
+	
+	private Boolean enabled;
+	
+	private String token;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime tokenCreationDate;
 	
 	@ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
 	@JoinTable( 
@@ -109,4 +123,65 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
 	}
+
+
+
+	public String getPasswordConf() {
+		return passwordConf;
+	}
+
+
+
+	public void setPasswordConf(String passwordConf) {
+		this.passwordConf = passwordConf;
+	}
+
+
+
+	public String getActivation() {
+		return activation;
+	}
+
+
+
+	public void setActivation(String activation) {
+		this.activation = activation;
+	}
+
+
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+
+	public String getToken() {
+		return token;
+	}
+
+
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
+	public LocalDateTime getTokenCreationDate() {
+		return tokenCreationDate;
+	}
+
+
+
+	public void setTokenCreationDate(LocalDateTime date) {
+		this.tokenCreationDate = date;
+	}
+	
+	
+	
 }
