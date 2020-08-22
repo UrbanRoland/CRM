@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="layouts/main">
+
+<head>
+<meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/addClientStyle.css">
+	<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div layout:fragment="content">
+		<div class="page-content p-5" id="content">
+			<div class="container  justify-content-center">
+				<h5 class="title">
+					<b>Ügyfél adatainak rögzítése</b>
+				</h5>
+				<div class="card">
+					<div class="card-body">
+
+						<form name="addClient" th:action="@{/addToClient}"
+							th:object="${client}" method="post" novalidate>
+							<div class="row ">
+								<div class="col-sm" align="center">
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/person-fill.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="name"
+												placeholder="Név" name="name" th:field="*{name}" required>
+
+											<div th:if="${#fields.hasErrors('name')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{name}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/people-fill.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="contactPerson"
+												placeholder="Kapcsolattartó" name="contactPerson"
+												th:field="*{contactPerson}" required>
+
+											<div th:if="${#fields.hasErrors('contactPerson')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{contactPerson}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/geo-alt.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="zipCode"
+												placeholder="Irányítószám" name="zipCode"
+												th:field="*{zipCode}" required>
+											<div th:if="${#fields.hasErrors('zipCode')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{zipCode}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/building.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="city"
+												placeholder="Város" name="city" th:field="*{city}" required>
+											<div th:if="${#fields.hasErrors('city')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{city}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/geo.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="address"
+												placeholder="Utca, házszám" name="address"
+												th:field="*{address}" required>
+
+											<div th:if="${#fields.hasErrors('address')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{address}"></p>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="col-sm" align="center">
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/envelope-fill.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="email"
+												placeholder="Email" name="email" th:field="*{email}"
+												required>
+											<div th:if="${#fields.hasErrors('email')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{email}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/telephone-plus-fill.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" id="phone"
+												placeholder="Telefonszám" name="phone" th:field="*{phone}"
+												required>
+											<div th:if="${#fields.hasErrors('phone')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{phone}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/file-earmark-plus-fill.svg">
+												</div>
+											</div>
+											<input type="number" class="form-control" id="taxnumber"
+												placeholder="Adószám" name="taxnumber"
+												th:field="*{taxnumber}" required>
+											<div th:if="${#fields.hasErrors('taxnumber')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{taxnumber}"></p>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/wallet-fill.svg">
+												</div>
+											</div>
+											<input type="number" class="form-control" id="monthlyFee"
+												placeholder="Havidíj" name="monthlyFee"
+												th:field="*{monthlyFee}" required>
+											<div th:if="${#fields.hasErrors('monthlyFee')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{monthlyFee}"></p>
+											</div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary  btn-block">
+										<b>Küldés</b>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

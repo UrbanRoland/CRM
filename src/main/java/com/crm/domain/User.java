@@ -1,9 +1,13 @@
 package com.crm.domain;
 
+import java.lang.annotation.Documented;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table( name="users" )
@@ -41,6 +47,22 @@ public class User {
 	
 	private Boolean enabled;
 	
+
+	private byte[] image;
+	
+
+	public byte[] getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+
+
 	private String token;
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime tokenCreationDate;
@@ -53,9 +75,25 @@ public class User {
 	)
 	private Set<Role> roles = new HashSet<Role>();
 	
+	@OneToMany(mappedBy = "user")
+	private List<Ticket> tickets;
+	
+	
 	public User() {}
 	
 	
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -119,9 +157,15 @@ public class User {
 		this.roles.add(new Role(roleName));
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", passwordConf=" + passwordConf
+				+ ", username=" + username + ", activation=" + activation + ", enabled=" + enabled + ", image="
+				+ Arrays.toString(image) + ", token=" + token + ", tokenCreationDate=" + tokenCreationDate + ", roles="
+				+ roles + ", tickets=" + tickets + "]";
 	}
 
 

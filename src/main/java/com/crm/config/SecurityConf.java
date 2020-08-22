@@ -13,6 +13,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.crm.service.UserDetailsImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -63,7 +65,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		        auth.authenticationProvider(authenticationProvider());
 		    }
 	  
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -87,14 +89,26 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/reset-password/**").permitAll()
 				.antMatchers("/resetPassword/**").permitAll()
 				.antMatchers("/confirm-reset/**").permitAll()
+				.antMatchers("/main/**").permitAll()
+				.antMatchers("/addTicket/**").permitAll()
+				.antMatchers("/settings/**").permitAll()
+				.antMatchers("/addClient/**").permitAll()
 				.antMatchers("/login/**").permitAll()
+				.antMatchers("/uploadImage/**").permitAll()
+				.antMatchers("/upload/**").permitAll()
+				.antMatchers("/addToClient/**").permitAll()
+				.antMatchers("/listTicket/**").permitAll()
+				.antMatchers("/test/**").permitAll()
+				.antMatchers("/addTicketToDatabase/**").permitAll()
+				
+				
 				.anyRequest().authenticated()
 				.and()
 		
 			.formLogin()
 				.loginPage("/login")
+				.defaultSuccessUrl("/listTicket",true)
 				.permitAll()
-				
 				.and()
 			.logout()
 				.logoutSuccessUrl("/login?logout")
@@ -105,6 +119,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		
 	}	
-	
+	 
+
 }
 	

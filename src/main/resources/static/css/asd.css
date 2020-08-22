@@ -1,12 +1,12 @@
 
-
 .dropdown-el {
   width: 100%;
   background: #e6e6e6;
   line-height: 1.5;
   border-bottom: 5vh solid #666666;
   font-family: 'Hind Siliguri', sans-serif;
-  font-size: 15px;
+  font-size: 20px;
+  margin-top: 20vh;
   min-width: 12em;
   position: relative;
   display: block;
@@ -20,7 +20,7 @@
   color: #999999;
   outline: none;
   border: .06em solid transparent;
-  border-radius: 25px;
+  border-radius: 1em;
   background-color: #e6e6e6;
   transition: 0.3s all ease-in-out;
 }
@@ -28,15 +28,15 @@
   display: none;
 }
 .dropdown-el label {
-  border-top: .06em solid #666666;
+  border-top: .06em solid #d9d9d9;
   display: block;
   height: 2em;
   line-height: 2em;
-  padding: 0 30px 0 68px;
+  padding-left: 1em;
+  padding-right: 3em;
   cursor: pointer;
   position: relative;
   transition: 0.3s color ease-in-out;
-
 }
 .dropdown-el label:nth-child(2) {
   margin-top: 2em;
@@ -61,11 +61,11 @@
   border-color: #666666 transparent transparent transparent;
   transition: .4s all ease-in-out;
 }
-
 .dropdown-el.expanded {
   border: 0.06em solid #666666;
-  background: #e6e6e6;
+  background: #999999;
   border-radius: .25em;
+  padding: 0;
   box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 5px 0px;
   max-height: 15em;
 }
@@ -78,23 +78,7 @@
 .dropdown-el.expanded input:checked + label {
   color: #666666;
 }
-
 .dropdown-el.expanded::after {
   transform: rotate(-180deg);
   top: .55em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

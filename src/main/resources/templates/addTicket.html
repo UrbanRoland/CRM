@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="layouts/main">
+
+<head>
+<meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/addTicketStyle.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+	<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div layout:fragment="content">
+
+		<div class="page-content p-5" id="content">
+
+
+
+			<h5 class="title">
+				<b>Hibajegy rögzítése</b>
+			</h5>
+			<div class="card">
+				<div class="card-body">
+
+					<form name="addTicket"  th:action="@{/addTicketToDatabase}" th:object="${ticket}" method="post" novalidate>
+						<div class="row ">
+
+							<div class="col-sm" align="center">
+
+								<div class="form-group">
+									<div class="input-group">
+
+										<select  th:field="*{client}" class="selectpicker form-control"
+											data-live-search="true">
+									 <option value="" disabled selected>Ügyfél neve</option>
+											<option th:each="tempClient : ${client}" th:value="${tempClient.getId()}">
+												<span th:text="${tempClient.name}"></span>	</option>		
+										</select>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<img src="images/icons/person-bounding-box.svg">
+											</div>
+										</div> 
+										<input type="text" class="form-control" id="declarer"
+											placeholder="Bejelentő" name="declarer"  th:field="*{declarer}" required>
+									<div th:if="${#fields.hasErrors('declarer')}"
+									class="errMessage alert alert-danger text-left" role="alert">
+									<p th:errors="*{declarer}"></p>
+								</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<img src="images/icons/card-heading.svg">
+											</div>
+										</div>
+										<input type="text" class="form-control" id="title"
+											placeholder="Cím" name="title" th:field="*{title}" required>
+								<div th:if="${#fields.hasErrors('title')}"
+									class="errMessage alert alert-danger text-left" role="alert">
+									<p th:errors="*{title}"></p>
+								</div>
+
+									</div>
+								</div>
+
+
+
+							</div>
+
+
+							<div class="col-sm" align="center">
+
+								<div class="form-group">
+									<div class="input-group">
+										<select  th:field="*{priority}" 
+										class="selectpicker form-control bg-white" multiple
+											data-max-options="1" >
+											
+											<option value="" disabled selected>Prioritás</option>
+											<option value="Kritikus hiba">Kritikus hiba</option>
+											<option value="Gyorsfelmérés">Gyorsfelmérés</option>
+											<option value="Extra fontos">Extra fontos</option>
+											<option value="Fontos">Fontos</option>
+											<option value="Normál">Normál</option>
+											
+										</select>
+									</div>
+								</div>
+
+
+
+
+
+								<div class="form-group">
+									<div class="input-group">
+
+										<div class="input-group date input-group-prepend" id="id_0">
+											<div
+												class="input-group-addon input-group-append input-group-text">
+												<img src="images/icons/calendar-plus-fill.svg">
+											</div>
+
+											<input type="text" class="form-control"
+												placeholder="Határidő" th:field="*{deadline}"/>
+								<div th:if="${#fields.hasErrors('deadline')}"
+									class="errMessage alert alert-danger text-left" role="alert">
+									<p th:errors="*{deadline}"></p>
+								</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+
+
+									<textarea class="form-control" id="exampleFormControlTextarea1"
+										rows="1" placeholder="Leírás..." th:field="*{description}" ></textarea>
+											<div th:if="${#fields.hasErrors('description')}"
+									class="errMessage alert alert-danger text-left" role="alert">
+									<p th:errors="*{description}"></p>
+								</div>
+										
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary  btn-block">
+								<b>Küldés</b>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

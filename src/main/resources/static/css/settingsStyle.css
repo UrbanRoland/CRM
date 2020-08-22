@@ -1,0 +1,12 @@
+
+.card-header{ color: #6C757D;}
+
+.btn-primary{
+color: #fff;
+    background-color: #727cf5;
+    border-color: #727cf5;
+}
+.btn-primary:hover{
+	 background-color: #4E5BF2;
+}
+

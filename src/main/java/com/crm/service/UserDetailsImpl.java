@@ -40,17 +40,24 @@ public class UserDetailsImpl implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		
-	
-		
 		return user.getPassword();
-	
-	
 	}
 
+	public String getUserEmail() {
+		return user.getEmail();
+	}
 	@Override
 	public String getUsername() {
 		return user.getEmail();
+	}
+	
+	public String getName() {
+		return user.getUsername();
+		
+	}
+	public Long getId() {
+		return user.getId();
+		
 	}
 
 	@Override

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="layouts/main">
+
+<head>
+<meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/listTicketStyle.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+	<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div layout:fragment="content">
+
+
+		<div class="page-content p-5" id="content">
+
+			<button class="btn btn-primary"
+				onclick="exportTableToExcel('tblData')">Exportálás exelbe</button>
+
+			<div class="container">
+
+				<div class="wrap-table100">
+
+
+
+					<table id="example" class="table table-bordered"
+						style="width: 100%">
+						<thead>
+							<tr class="row header">
+								<th class="cell">Ügyfél neve</th>
+								<th class="cell">Hiba címe</th>
+								<th class="cell">Státusz</th>
+								<th class="cell"></th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="row" th:each="tempTicket : ${tickets}">
+								<td class="cell" th:text="${tempTicket.getClient(). getName() }"></td>
+								<td class="cell" th:text="${tempTicket.getTitle()}"></td>
+								<td class="cell" th:text="${tempTicket.getStatus()}"></td>
+								<td class="cell noExport">
+									<button type="button" class=" onlyIcon" data-toggle="modal"
+										data-target="#exampleModal"
+										th:attrappend="data-target=${tempTicket.getId()}">
+										<span><svg width="1em" height="1em" viewBox="0 0 16 16"
+												class="bi bi-pencil-square" fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
+  											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+  											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+											</svg>
+										</span>
+									</button>
+									<div class="modal fade " id="exampleModal" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true"
+										th:attrappend="id=${tempTicket.getId()}">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal
+														title</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body"
+													th:text="${tempTicket.getClient().getName() }"></div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Save
+														changes</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+								</td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

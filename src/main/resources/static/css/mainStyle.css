@@ -60,3 +60,6 @@ h3 {
 @media (max-width: @screen-xs-min) {
   .modal-xs { width: @modal-sm; }
 }
+.list-group{
+	padding-bottom: 40px;
+}

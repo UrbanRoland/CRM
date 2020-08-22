@@ -1,5 +1,9 @@
 package com.crm.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -15,14 +19,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.crm.domain.User;
 import com.crm.domain.Role;
 import com.crm.repository.RoleRepository;
 import com.crm.repository.UserRepository;
+import com.crm.service.interfaces.IUser;
 
 @Service("userServiceImpl")
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements IUser, UserDetailsService {
 
 	private static final long EXPIRE_TOKEN_AFTER_MINUTES = 30;
 	private final String USER_ROLE = "Ügyintéző";
@@ -94,7 +100,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			word[j] = (char) ('a' + random.nextInt(26));
 		}
 		String toReturn = new String(word);
-		System.out.println("Aktivációs kód: " + toReturn);
+		//System.out.println("Aktivációs kód: " + toReturn);
 		return new String(word);
 	}
 
@@ -125,8 +131,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setTokenCreationDate(LocalDateTime.now());
 
 		user = userRepository.save(user);
-		//emailService.sendLinkToUser(email,user.getToken());
-		System.out.println(user.getToken());
+		emailService.sendLinkToUser(email,user.getToken());
+	//	System.out.println(user.getToken());
 		return user.getToken();
 	}
 
@@ -152,7 +158,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setTokenCreationDate(null);
 	
 		userRepository.save(user);
-		//emailService.changedPassword(user.getEmail());
+		emailService.changedPassword(user.getEmail());
 		return "Your password successfully updated.";
 	}
 
@@ -169,5 +175,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return diff.toMinutes() >= EXPIRE_TOKEN_AFTER_MINUTES;
 
 	}
+
+	@Override
+	public void updateUserName(String username, String email) {
+		userRepository.updateUserName(username, email);
+		
+	}
+
+	@Override
+	public void updateUserPassword(String password, String passwordConf, String email) {
+		userRepository.updateUserPassword(password, passwordConf, email);
+		emailService.changedPassword(email);
+		
+	}
+
+	@Override
+	public void addPhoto(MultipartFile file) throws Exception {
+		
+		  String UPLOAD_DIR = "./src/main/resources/static/photos/";
+		byte[] bytes=file.getBytes();
+		Path path=Paths.get(UPLOAD_DIR+file.getOriginalFilename());
+ 		  Files.write(path, bytes);
+		  
+	}
+
+	@Override
+	public Optional<User> findById(Long id) {
+	return userRepository.findById(id);
+	}
+
+	
 
 }

@@ -208,6 +208,48 @@
 		</div>
 	</div>
 </div> 
+
+<div  th:if="${param.logout}" id="logout" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+			
+				
+				 <img class="icon img-fluid rounded mx-auto d-block" src="images/icons/check2-circle.svg">
+				
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body text-center">
+				<h4>Siker!</h4>	
+				<p>A kijelentkezés sikeressen megtörtént!</p>
+				
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+			</div>
+		</div>
+	</div>
+</div> 
+
+<div  th:if="${param.updateUserNameSuccess}" id="updateUserNameSuccess" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header">
+			
+				
+				 <img class="icon img-fluid rounded mx-auto d-block" src="images/icons/check2-circle.svg">
+				
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body text-center">
+				<h4>Siker!</h4>	
+				<p>A jelszava megváltozott!</p>
+				
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+			</div>
+		</div>
+	</div>
+</div> 
+
+
 	<!--===============================================================================================-->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -231,9 +273,14 @@ $(document).ready(function(){
 	$("#invalidToken").modal('show');
 	$("#tokenExpired").modal('show');
 	$("#emailSend").modal('show');
+	$("#logout").modal('show');
+	$("#updateUserNameSuccess").modal('show');
+	$("#updatedUserPasswordSuccess").modal('show');
+	
 	
 });
 
 </script>
+<script  src="js/dropDownList.js"></script>
 </body>
 </html>

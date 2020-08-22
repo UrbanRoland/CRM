@@ -1,0 +1,229 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap')
+	;
+
+* {
+	font-family: 'Nunito', sans-serif;
+}
+
+.contentText {
+	color: #6C7591;
+}
+
+.menu {
+	width: 15px;
+	height: 20px;
+}
+
+#sidebarCollapse {
+	position: absolute;
+	margin-top: 1.5rem;
+}
+
+.toggle {
+	width: calc(100% + 16rem);
+	margin-left: 15.7rem;
+	transition: all 0.4s;
+	padding: 30px;
+}
+
+.vertical-nav {
+	min-width: 17rem;
+	width: 17rem;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.4s;
+	background-color: #313a46;
+}
+
+.page-content {
+	width: calc(100% - 17rem);
+
+	margin-left: 17rem;
+	transition: all 0.4s;
+}
+
+.nav-link {
+	color: #8391A2;
+}
+
+.nav-link:hover {
+	color: #B4C5DB;
+}
+
+span {
+	padding-left: 10px;
+}
+
+/* for toggle behavior */
+#sidebar.active {
+	margin-left: -17rem;
+}
+
+#content.active {
+	width: 100%;
+	margin: 0;
+}
+
+@media ( max-width : 768px) {
+	#sidebar {
+		margin-left: -17rem;
+	}
+	#sidebar.active {
+		margin-left: 0;
+	}
+	#content {
+		width: 100%;
+		margin: 0;
+	}
+	#content.active {
+		margin-left: 17rem;
+		width: calc(100% - 17rem);
+	}
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+body {
+	background-color: #F6F7FB;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+.separator {
+	margin: 3rem 0;
+	border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+	letter-spacing: 0.1em;
+}
+
+.text-gray {
+	color: #aaa;
+}
+
+/*
+*
+* ==========================================
+* Dropdown list
+* ==========================================
+*
+*/
+.iconPosition {
+	margin-left: -10px;
+}
+
+.linkPosition {
+	margin-left: 15px;
+}
+
+.dropdown-el {
+	width: 80%;
+	position: relative;
+	display: block;
+	min-height: 2em;
+	max-height: 2em;
+	overflow: hidden;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #6C7591;
+	outline: none;
+	margin-bottom: 5px;
+	transition: 0.3s all ease-in-out;
+	margin-left: -7px;
+}
+
+.dropdown-el::after {
+	content: "";
+	position: absolute;
+	right: 1px;
+	top: 0.9em;
+	border: 0.3em solid #666666;
+	border-color: #6C7591 transparent transparent transparent;
+	transition: .4s all ease-in-out;
+}
+
+.dropdown-el.expanded {
+	padding: 0;
+	max-height: 10em;
+}
+
+
+.dropdown-el.expanded {
+	color: #666666;
+}
+
+.dropdown-el.expanded::after {
+	transform: rotate(-180deg);
+}
+
+
+
+
+
+
+
+
+
+
+.scrollbar-style::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #313A46;
+border-radius: 10px; 
+}
+
+
+
+.scrollbar-style::-webkit-scrollbar-thumb {
+
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #6A737E; 
+
+}
+
+.scrollbar-style {
+scrollbar-color: #6A737E #F5F5F5;
+
+}
+
+
+.thin::-webkit-scrollbar {
+width: 6px;
+ }
+
+.scroll {
+position: relative;
+overflow-y: scroll;
+height: 70%;
+background-color: #313A46; 
+border: none;
+width: 99.5%;
+
+}
+
+
+.errMessage {
+	width: 100%;
+	margin-top: .25rem;
+	font-size: 80%;
+	color: #dc3545;
+	margin-top: .25rem;
+	font-size: 80%;
+	color: #dc3545
+}
+
+.alert {
+	padding: 5px;
+	margin-bottom: 5px;
+	
+}
+
