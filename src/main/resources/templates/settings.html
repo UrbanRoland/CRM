@@ -2,13 +2,15 @@
 <html lang="en" layout:decorator="layouts/main">
 
 <head>
+<title>Beállítások</title>
 <meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="icon" type="image/svg" href="images/icons/settings.svg" />
 	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="css/settingsStyle.css">
 	<!--===============================================================================================-->
 </head>
 <body>
-
 
 	<div layout:fragment="content">
 		<div class="page-content p-5" id="content">
@@ -17,7 +19,6 @@
 					<div class="card-header bg-white">
 						<h5>
 							<b>Adatok módosítása</b>
-
 						</h5>
 					</div>
 					<div class="card-body">
@@ -29,16 +30,13 @@
 								<form name="updateUserName" th:action="@{/updateUserName}"
 									th:object="${user}" method="post" novalidate>
 									<div class="card-body">
-
 										<div class="form-group">
 											<div class="input-group">
-
 												<div class="input-group-prepend">
 													<div class="input-group-text">
 														<img src="images/icons/person-fill.svg">
 													</div>
 												</div>
-
 												<input type="text" class="form-control" id="username"
 													placeholder="Felhasználónév" name="username"
 													th:field="*{username}" required>
@@ -51,7 +49,6 @@
 											</div>
 										</div>
 									</div>
-
 
 									<div class="card-footer bg-white" style="margin-top: 54px;">
 										<button type="submit" class="btn btn-primary  btn-block">
@@ -67,8 +64,6 @@
 								<form name="updateUserName" th:action="@{/updateUserPassword}"
 									th:object="${user}" method="post" novalidate>
 									<div class="card-body">
-
-
 										<div class="form-group">
 											<div class="input-group">
 												<div class="input-group-prepend">

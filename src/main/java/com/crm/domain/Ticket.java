@@ -8,10 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -24,7 +23,7 @@ public class Ticket {
 	@ManyToOne
 	private Client client;
 
-	private String declarer;
+	private String notifier;
 	
 	private String priority;
 	
@@ -34,7 +33,7 @@ public class Ticket {
 
 	private String description;
 	
-
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deadline;
 	
 	private String status;
@@ -44,24 +43,6 @@ public class Ticket {
 	
 	@ManyToOne
 	private User user;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
-
-
 
 	public Long getId() {
 		return id;
@@ -79,12 +60,12 @@ public class Ticket {
 		this.client = client;
 	}
 
-	public String getDeclarer() {
-		return declarer;
+	public String getNotifier() {
+		return notifier;
 	}
 
-	public void setDeclarer(String declarer) {
-		this.declarer = declarer;
+	public void setNotifier(String notifier) {
+		this.notifier = notifier;
 	}
 
 	public String getPriority() {
@@ -111,6 +92,22 @@ public class Ticket {
 		this.description = description;
 	}
 
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
@@ -126,6 +123,6 @@ public class Ticket {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+
 }

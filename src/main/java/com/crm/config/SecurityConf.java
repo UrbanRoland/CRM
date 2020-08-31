@@ -58,7 +58,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		      return authenticationProvider;
 		 }
 
-	// Enable jdbc authentication
+
 		
 		 @Override
 		    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -74,34 +74,39 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 			//oldalak engedélyezése
 			.antMatchers("/console/**").permitAll()
 				.regexMatchers(".*\\.css$").permitAll()
+				.regexMatchers(".*\\.js$").permitAll()
+				.antMatchers("/login/**").permitAll()
 				.antMatchers("/registration").permitAll()
+				.antMatchers("/reg").permitAll()
+				.antMatchers("/activation/**").permitAll()
 				.antMatchers("/forgetPassword").permitAll()
+			//	.antMatchers("/forgot-password/**").permitAll()
+				.antMatchers("/reset-password/**").permitAll()
+				.antMatchers("/forgetPasswordAction/**").permitAll()
+				.antMatchers("/resetPassword/**").permitAll()
+				.antMatchers("/confirm-reset/**").permitAll()
 				.antMatchers("/errorPages/404").permitAll()
 				.antMatchers("/errorPages/detaildError").permitAll()
 				.antMatchers("/images/**").permitAll()
-				.antMatchers("/db/**").permitAll()
-				.regexMatchers(".*\\.js$").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.antMatchers("/reg").permitAll()
-				.antMatchers("/forgetPasswordAction/**").permitAll()
-				.antMatchers("/activation/**").permitAll()
-				.antMatchers("/forgot-password/**").permitAll()
-				.antMatchers("/reset-password/**").permitAll()
-				.antMatchers("/resetPassword/**").permitAll()
-				.antMatchers("/confirm-reset/**").permitAll()
+		
+			/*	
 				.antMatchers("/main/**").permitAll()
 				.antMatchers("/addTicket/**").permitAll()
 				.antMatchers("/settings/**").permitAll()
+				
+				.antMatchers("/db/**").permitAll()
+				
+				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/addClient/**").permitAll()
-				.antMatchers("/login/**").permitAll()
 				.antMatchers("/uploadImage/**").permitAll()
 				.antMatchers("/upload/**").permitAll()
 				.antMatchers("/addToClient/**").permitAll()
 				.antMatchers("/listTicket/**").permitAll()
 				.antMatchers("/test/**").permitAll()
 				.antMatchers("/addTicketToDatabase/**").permitAll()
-				
-				
+				.antMatchers("/updateTicket/**").permitAll()
+				.antMatchers("/deleteTicket/**").permitAll()
+				*/
 				.anyRequest().authenticated()
 				.and()
 		
@@ -115,8 +120,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.permitAll();
 		
 		//ezek csak tesztelesre kellenek
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+		//http.csrf().disable();
+	//	http.headers().frameOptions().disable();
 		
 	}	
 	 

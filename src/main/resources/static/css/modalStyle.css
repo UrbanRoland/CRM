@@ -53,6 +53,18 @@
 		padding: 6px 20px;
         border: none;
     }
+        .btn-danger {
+        color: #fff;
+        border-radius: 4px;
+		
+		text-decoration: none;
+		transition: all 0.4s;
+        line-height: normal;
+		border-radius: 30px;
+		margin-top: 10px;
+		padding: 6px 20px;
+        border: none;
+    }
 	.modal-confirm .btn:hover, .modal-confirm .btn:focus {
 		background: #eda645;
 		outline: none;
@@ -72,7 +84,7 @@
 	}
 	.icon{
 	text-align: center;
-width:30%;
+	width:30%;
 	
 }
 

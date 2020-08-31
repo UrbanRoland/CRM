@@ -2,14 +2,16 @@
 <html lang="en" layout:decorator="layouts/main">
 
 <head>
+<title>Ügyfél hozzáadása</title>
 <meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="icon" type="image/svg" href="images/icons/addClient.svg" />
 	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="css/addClientStyle.css">
 	<!--===============================================================================================-->
 </head>
+
 <body>
-
-
 	<div layout:fragment="content">
 		<div class="page-content p-5" id="content">
 			<div class="container  justify-content-center">
@@ -18,7 +20,6 @@
 				</h5>
 				<div class="card">
 					<div class="card-body">
-
 						<form name="addClient" th:action="@{/addToClient}"
 							th:object="${client}" method="post" novalidate>
 							<div class="row ">

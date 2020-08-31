@@ -1,6 +1,8 @@
 package com.crm.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,7 @@ import com.crm.validators.ClientValidator;
 import com.crm.validators.ForgetPassword;
 import com.crm.validators.RegValidator;
 import com.crm.validators.ResetPassword;
+import com.crm.validators.UpdateTicketValidator;
 import com.crm.validators.UserNameValidator;
 
 @Controller
@@ -65,79 +68,98 @@ public class HomeController {
 
 	@RequestMapping("addTicket")
 	public String addTicket(Model model) {
-		model.addAttribute("ticket",new Ticket());
-		
-		List<Client> allclient=clientService.findAll();
-		model.addAttribute("client",allclient);
+		model.addAttribute("ticket", new Ticket());
+
+		List<Client> allclient = clientService.findAll();
+		model.addAttribute("client", allclient);
 		return "addTicket";
 	}
 	
 	@PostMapping("/addTicketToDatabase")
-	public String addTicketToDatabase(@ModelAttribute("ticket")  @Validated Ticket ticket,Client client ,BindingResult bindingResult) {
-		
-	/*	AddTicketValidator validator=new AddTicketValidator();
-		
+	public String addTicketToDatabase(@ModelAttribute("ticket") @Validated Ticket ticket, BindingResult bindingResult,
+			Client client) {
+
+		AddTicketValidator validator = new AddTicketValidator();
+
+		if (ticket.getDeadline() == null) {
+		//	bindingResult.rejectValue("deadline", "valid.deadline", "Kötelező kitölteni!");
+		}
+
 		validator.validate(ticket, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "addTicket";
 		}
-		*/
+
 		ticket.setCreationDate(LocalDateTime.now());
 		ticket.setStatus("Nyitott");
 		
+//System.out.println("A státusz " +ticket.getStatus());
 		ticket.setClient(client);
-		
-		//megkeresni a bejelentkezett felhasznalo id
+
+		// megkeresni a bejelentkezett felhasznalo id
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long authenticatedUserId=null;
+		Long authenticatedUserId = null;
 		if (principal instanceof UserDetails) {
-			authenticatedUserId = ((UserDetailsImpl)principal).getId();
+			authenticatedUserId = ((UserDetailsImpl) principal).getId();
 		} else {
 			authenticatedUserId = (Long) principal;
 		}
-	
-		User user= userService.findById(authenticatedUserId).get();
+
+		User user = userService.findById(authenticatedUserId).get();
 		ticket.setUser(user);
+
 		ticketService.saveTicket(ticket);
-		
+
 		return "redirect:/addTicket?ticketAddSuccess";
 	}
 	
 	@RequestMapping("listTicket")
 	public String listTicket(Model model) {
-		model.addAttribute("tickets",ticketService.findAll());
+		model.addAttribute("tickets", ticketService.findAll());
+		model.addAttribute("ticket", new Ticket());
 		return "listTicket";
 	}
-	@RequestMapping("test")
-	public String test() {
-		return "test";
+	
+	@PostMapping("/deleteTicket")
+	public String deleteTicket(@ModelAttribute("ticket") Ticket ticket) {
+		ticketService.deleteById(ticket.getId());
+		return "redirect:/listTicket?ticketDeleteSuccess";
 	}
-	
-	
-	@RequestMapping("uploadImage")
-	public String uploadImage() {
-		return "uploadImage";
-	}
-	
-	@PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
-		String result="";
-		try {
-			userService.addPhoto(file);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			log.error("hiba",e);
-			
+
+	@PostMapping("/updateTicket")
+	public String updateTicket(@ModelAttribute("ticket") @Validated Ticket ticket, BindingResult bindingResult) {
+
+		Date date = ticket.getDeadline();
+
+		if (date == null) {
+
+			return "redirect:/listTicket?updateError";
 		}
-       
 
-        return "redirect:/";
-    }
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-	
-	
-	
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long authenticatedUserId = null;
+		if (principal instanceof UserDetails) {
+			authenticatedUserId = ((UserDetailsImpl) principal).getId();
+		} else {
+			authenticatedUserId = (Long) principal;
+		}
+
+		User user = userService.findById(authenticatedUserId).get();
+
+		UpdateTicketValidator validator = new UpdateTicketValidator();
+
+		validator.validate(ticket, bindingResult);
+		if (bindingResult.hasErrors()) {
+
+			return "redirect:/listTicket?updateError";
+		}
+
+		ticketService.updateTicket(ticket.getNotifier(), ticket.getPriority(), ticket.getTitle(),
+				ticket.getDescription(), ticket.getStatus(), ticket.getDeadline(), user, ticket.getId());
+		return "redirect:/listTicket?ticketUpdateSuccess";
+	}
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -147,7 +169,6 @@ public class HomeController {
 	@RequestMapping("registration")
 	public String registration(Model model) {
 		model.addAttribute("user", new User());
-
 		return "registration";
 	}
 
@@ -167,10 +188,10 @@ public class HomeController {
 			return "registration";
 		}
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		
+
 		user.setPassword(encodedPassword);
 		user.setPasswordConf(encodedPassword);
-		
+
 		userService.registerUser(user);
 		return "redirect:/login?needActivation";
 	}
@@ -184,28 +205,23 @@ public class HomeController {
 	@PostMapping("/forgetPasswordAction")
 	public String forgetPasswordAction(@ModelAttribute @Validated User user, BindingResult bindingResult,
 			@RequestParam String email) {
-		
-	
 
 		String response = userService.forgotPassword(email);
 
 		if (!response.startsWith("Invalid")) {
 
-		
 			return "redirect:/login?emailSend";
-		
+
 		} else {
 			return "redirect:/forgetPassword?emailNotFound";
 		}
-	
+
 	}
 
 	@RequestMapping(value = "/confirm-reset")
-	public String resetPassword(Model model, @RequestParam String token, @ModelAttribute  User user,BindingResult bindingResult,
-			HttpSession session) {
+	public String resetPassword(Model model, @RequestParam String token, @ModelAttribute User user,
+			BindingResult bindingResult, HttpSession session) {
 
-	
-		
 		session.setAttribute("token", user.getToken());
 
 		model.addAttribute("user", user);
@@ -214,22 +230,23 @@ public class HomeController {
 	}
 
 	@PostMapping(value = "/reset-password")
-	public String resetPassword(@ModelAttribute @Validated User user, HttpSession session,BindingResult bindingResult) {
+	public String resetPassword(@ModelAttribute @Validated User user, HttpSession session,
+			BindingResult bindingResult) {
 		String token = null;
 
 		if (session.getAttribute("token") != null) {
 			token = (String) session.getAttribute("token");
 
 		}
-		
-		ResetPassword validator=new ResetPassword();
+
+		ResetPassword validator = new ResetPassword();
 		validator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "resetPassword";
 		}
-		
+
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		
+
 		if (userService.resetPassword(token, encodedPassword) == "Invalid token.") {
 			return "redirect:/login?invalidToken";
 		} else if (userService.resetPassword(token, encodedPassword) == "Token expired.") {
@@ -245,10 +262,7 @@ public class HomeController {
 		userService.userActivation(code);
 		return "redirect:/login?activationSuccess";
 	}
-	
-	
-	
-	
+
 	@RequestMapping("settings")
 	public String settings(Model model) {
 		model.addAttribute("user",new User());
@@ -257,54 +271,49 @@ public class HomeController {
 	
 	@PostMapping("/updateUserName")
 	public String updateUserName(@ModelAttribute @Validated User user, BindingResult bindingResult) {
-		
-		
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String authenticatedUserEmail=null;
+		String authenticatedUserEmail = null;
 		if (principal instanceof UserDetails) {
-			authenticatedUserEmail = ((UserDetailsImpl)principal).getUserEmail();
+			authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
 		} else {
 			authenticatedUserEmail = principal.toString();
 		}
-		
-		UserNameValidator validator=new UserNameValidator();
+
+		UserNameValidator validator = new UserNameValidator();
 		validator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "settings";
 		}
-		
+
 		userService.updateUserName(user.getUsername(), authenticatedUserEmail);
-		
+
 		return "redirect:/settings?updateUserNameSuccess";
-		}
+	}
 	
-	@PostMapping("/updateUserPassword")
-	public String updateUserPassword(@ModelAttribute @Validated User user, BindingResult bindingResult) {
-		
-		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String authenticatedUserEmail=null;
-		if (principal instanceof UserDetails) {
-			authenticatedUserEmail = ((UserDetailsImpl)principal).getUserEmail();
-		} else {
-			authenticatedUserEmail = principal.toString();
-		}
-		
-		ResetPassword validator=new ResetPassword();
-		
-	
-		validator.validate(user, bindingResult);
-		if (bindingResult.hasErrors()) {
-			return "settings";
-		}
-		
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		
-		
-		
-		userService.updateUserPassword(encodedPassword, encodedPassword, authenticatedUserEmail);
-		
-		return "redirect:/settings?updatedUserPasswordSuccess";
+		@PostMapping("/updateUserPassword")
+		public String updateUserPassword(@ModelAttribute @Validated User user, BindingResult bindingResult) {
+
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String authenticatedUserEmail = null;
+			if (principal instanceof UserDetails) {
+				authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
+			} else {
+				authenticatedUserEmail = principal.toString();
+			}
+
+			ResetPassword validator = new ResetPassword();
+
+			validator.validate(user, bindingResult);
+			if (bindingResult.hasErrors()) {
+				return "settings";
+			}
+
+			String encodedPassword = passwordEncoder.encode(user.getPassword());
+
+			userService.updateUserPassword(encodedPassword, encodedPassword, authenticatedUserEmail);
+
+			return "redirect:/settings?updatedUserPasswordSuccess";
 		}
 	
 	@RequestMapping("addClient")
@@ -313,22 +322,35 @@ public class HomeController {
 		return "addClient";
 	}
 	
-	
-	
 	@PostMapping("/addToClient")
 	public String addToClient(@ModelAttribute @Validated Client client, BindingResult bindingResult) {
 
 		ClientValidator validator = new ClientValidator();
-
-		
-
 		validator.validate(client, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "addClient";
 		}
-	
+		
 		clientService.saveClient(client);
 		return "redirect:/addClient?clientAddSuccess";
 	}
 	
+	@RequestMapping("uploadImage")
+	public String uploadImage() {
+		return "uploadImage";
+	}
+	
+	@PostMapping("/upload")
+	public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
+		String result = "";
+		try {
+			userService.addPhoto(file);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("hiba", e);
+
+		}
+		return "redirect:/";
+	}
 }

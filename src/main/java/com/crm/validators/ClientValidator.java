@@ -7,7 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.crm.domain.Client;
-import com.crm.domain.User;
+
 
 
 public class ClientValidator  implements Validator {

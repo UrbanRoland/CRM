@@ -1,97 +1,352 @@
 <!DOCTYPE html>
 <html lang="en" layout:decorator="layouts/main">
-
 <head>
+<title>Hibajegyek listázása</title>
 <meta charset="UTF-8">
+
+	<!--===============================================================================================-->
+		<link rel="icon" type="image/svg" href="images/icons/listTicket.svg" />
 	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="css/listTicketStyle.css">
 	<!--===============================================================================================-->
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+			<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap4.css">
+	<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
 	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+	<!--===============================================================================================-->
+	
 </head>
 <body>
 
-
 	<div layout:fragment="content">
-
-
 		<div class="page-content p-5" id="content">
+			<div class="card">
+				<div class="container table-responsive">
+					<div class="wrap-table100 ">
+						<button class="btn btn-primary" id="export">Exportálás</button>
+						
+						<table id="exportToExcel"  style="display:none">
+							<tr>
+								<th>Azonosító</th>
+								<th>Bejelentő</th>
+								<th>Ügyfél neve</th>
+								<th>Prioritás</th>
+								<th>Cím</th>
+								<th>Leírás</th>
+								<th>Státusz</th>
+								<th>Határidő</th>
+							</tr>
+							<tbody>
+								<tr th:each="tempTicket : ${tickets}">
+									<td th:text="*{tempTicket.getId()}"></td>
+									<td th:text="*{tempTicket.getNotifier()}"></td>
+									<td th:text="*{tempTicket.getClient().getName()}"></td>
+									<td th:text="*{tempTicket.getPriority()}"></td>
+									<td th:text="*{tempTicket.getTitle()}"></td>
+									<td th:text="*{tempTicket.getDescription()}"></td>
+									<td th:text="*{tempTicket.getStatus()}"></td>
+									<td th:text="*{tempTicket.getDeadline()}"></td>
+								</tr>
+							</tbody>
+						</table>
 
-			<button class="btn btn-primary"
-				onclick="exportTableToExcel('tblData')">Exportálás exelbe</button>
-
-			<div class="container">
-
-				<div class="wrap-table100">
-
-
-
-					<table id="example" class="table table-bordered"
-						style="width: 100%">
-						<thead>
-							<tr class="row header">
-								<th class="cell">Ügyfél neve</th>
-								<th class="cell">Hiba címe</th>
-								<th class="cell">Státusz</th>
-								<th class="cell"></th>
-
+					<table id="example" class="table table-bordered" style="width: 100%">
+						<thead class="thead-dark">
+							<tr >
+								<th scope="col">Ügyfél neve</th>
+								<th scope="col">Hiba címe</th>
+								<th scope="col">Státusz</th>
+								<th scope="col">Határídő</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="row" th:each="tempTicket : ${tickets}">
-								<td class="cell" th:text="${tempTicket.getClient(). getName() }"></td>
-								<td class="cell" th:text="${tempTicket.getTitle()}"></td>
-								<td class="cell" th:text="${tempTicket.getStatus()}"></td>
-								<td class="cell noExport">
-									<button type="button" class=" onlyIcon" data-toggle="modal"
-										data-target="#exampleModal"
+							<tr scope="row" th:each="tempTicket : ${tickets}">
+								<td >							
+									<a href="" data-toggle="modal" data-target="#asd" th:text="*{tempTicket.getClient().getName()}"
 										th:attrappend="data-target=${tempTicket.getId()}">
-										<span><svg width="1em" height="1em" viewBox="0 0 16 16"
-												class="bi bi-pencil-square" fill="currentColor"
-												xmlns="http://www.w3.org/2000/svg">
-  											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-  											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-											</svg>
-										</span>
-									</button>
-									<div class="modal fade " id="exampleModal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true"
-										th:attrappend="id=${tempTicket.getId()}">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Modal
-														title</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body"
-													th:text="${tempTicket.getClient().getName() }"></div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary">Save
-														changes</button>
+									</a> 
+										<!-- Modal -->
+										<div class="modal fade" id="asd" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true"
+											th:attrappend="id=${tempTicket.getId()}">
+											>
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="asd">Ügyfél adatok</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+
+														<div class="container">
+															<div class="row">
+																<div class="col-sm">
+																	<label>Azanosító: </label> <b
+																		th:text="*{tempTicket.getClient().getId()}"></b><br />
+																	<label>Név: </label> <b
+																		th:text="*{tempTicket.getClient().getName()}"></b><br />
+																	<label>Kapcsolattartó: </label> <b
+																		th:text="*{tempTicket.getClient().getContactPerson()}"></b></br>
+																	<label>Email: </label> <b
+																		th:text="*{tempTicket.getClient().getEmail()}"></b><br />
+																	<label>Telefon: </label> <b
+																		th:text="*{tempTicket.getClient().getPhone()}"></b>
+																</div>
+																<div class="col-sm">
+																	<label>Irányítószám: </label> <b
+																		th:text="*{tempTicket.getClient().getZipCode()}"></b><br />
+																	<label>Város: </label> <b
+																		th:text="*{tempTicket.getClient().getCity()}"></b><br />
+																	<label>Cím: </label> <b
+																		th:text="*{tempTicket.getClient().getAddress()}"></b><br />
+																	<label>Adószám: </label> <b
+																		th:text="*{tempTicket.getClient().getTaxnumber()}"></b><br />
+																	<label>Havidíj: </label> <b
+																		th:text="*{tempTicket.getClient().getMonthlyFee()}"></b><b>
+																		FT</b> <br />
+
+
+																</div>
+
+															</div>
+														</div>
+
+
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Bezár</button>
+
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</td>
+									<td  th:text="${tempTicket.getTitle()}"></td>
+									<td  th:text="${tempTicket.getStatus()}"></td>
+									<td  th:text="${#dates.format(tempTicket.getDeadline(), 'YYYY-MM-dd')}"></td>
+									<td>
+											
+									<button type="button" class=" onlyIcon" data-toggle="modal"
+										data-target="#ticketdetails"
+										th:attrappend="data-target=${tempTicket.getId()}">
+										<span>
+											<svg width="1em" height="1em" viewBox="0 0 16 16"
+												class="bi bi-pencil-square" fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg">
+  												<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+  												<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+											</svg>
+										</span>
+									</button>
+
+										<div class="modal fade" id="ticketdetails" tabindex="-1"
+											th:attrappend="id=${tempTicket.getId()}">
+											<div class="modal-dialog modal-xl  modal-dialog-scrollable">									
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">
+															Részletek</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">	
+														<form name="updateTicket" th:action="@{/updateTicket}"
+															method="post" novalidate>																							
+															<div class="row ">
+																	
+																<div class="col-sm" align="center">
+																	<input type="hidden" name="id"
+																		th:value="*{tempTicket.getId()}">
+																	<div class="form-group">
+																		<label>Hiba rögzítő</label>
+																		<div class="input-group">
+																			<p class="bg-dark form-control text-white"
+																				th:text="*{tempTicket.getUser().getUsername()}"></p>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label>Bejelentő</label>
+																		<div class="input-group">
+																			<div class="input-group-prepend">
+																				<div class="input-group-text">
+																					<img src="images/icons/person-bounding-box.svg">
+																				</div>
+																			</div>
+																			<input type="text" class="form-control"
+																				name="notifier"
+																				th:value="*{tempTicket.getNotifier()}" required>
+																		</div>
+																		<small class="form-text text-muted text-left">Kérjük
+																			töltse ki!</small>
+																	</div>
+
+																	<div class="form-group">
+																		<label>Cím</label>
+																		<div class="input-group">
+																			<div class="input-group-prepend">
+																				<div class="input-group-text">
+																					<img src="images/icons/card-heading.svg">
+																				</div>
+																			</div>
+																			<input type="text" class="form-control"
+																				placeholder="Cím" name="title"
+																				th:value="*{tempTicket.getTitle()}" required>
+																		</div>
+																		<small class="form-text text-muted text-left">Kérjük
+																			töltse ki!</small>
+																	</div>
+
+																	<div class="form-group">
+																		<label>Státusz</label>
+																		<div class="input-group">
+																			<select class="selectpicker form-control bg-white"
+																				multiple name="status" data-max-options="1">
+																				<option th:value="*{tempTicket.getStatus()}"
+																					th:text="*{tempTicket.getStatus()}" selected></option>
+																				<option th:if="${tempTicket.getStatus()!='Nyitott'}"
+																					value="Nyitott">Nyitott</option>
+																				<option th:if="${tempTicket.getStatus()!='Zárt'}"
+																					value="Zárt">Zárt</option>
+																				<option
+																					th:if="${tempTicket.getStatus()!='Folyamatban'}"
+																					value="Folyamatban">Folyamatban</option>
+																				<option
+																					th:if="${tempTicket.getStatus()!='Felfügesztett'}"
+																					value="Felfügesztett">Felfügesztett</option>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																
+														<p th:text="*{tempTicket.getPriority()}"> </p>
+														
+																<div class="col-sm" align="center">
+																	<div class="form-group">
+																		<label>Prioritás</label>
+																		<div class="input-group">
+																			<select class="selectpicker form-control bg-white"
+																				multiple name="priority" data-max-options="1">
+																				<option th:value="*{tempTicket.getPriority()}"
+																					th:text="*{tempTicket.getPriority()}" selected></option>
+																		
+																				<option
+																					th:if="${tempTicket.getPriority()!='Kritikus hiba'}"
+																					value="Kritikus hiba">Kritikus hiba</option>
+																				<option
+																					th:if="${tempTicket.getPriority()!='Gyorsfelmérés'}"
+																					value="Gyorsfelmérés">Gyorsfelmérés</option>
+																				<option
+																					th:if="${tempTicket.getPriority()!='Extra fontos'}"
+																					value="Extra fontos">Extra fontos</option>
+																				<option
+																					th:if="${tempTicket.getPriority()!='Fontos'}"
+																					value="Fontos">Fontos</option>
+																				<option
+																					th:if="${tempTicket.getPriority()!='Normál'}"
+																					value="Normál">Normál</option>
+																			</select>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label>Határidő</label>
+																		<div class="input-group">
+																			<div class="input-group date input-group-prepend"
+																				id="id_0">
+																				<div
+																					class="input-group-addon input-group-append input-group-text">
+																					<img src="images/icons/calendar-plus-fill.svg">
+																				</div>
+																				<input type="text" class="dateInput form-control"
+																					name="deadline"
+																					th:value="${#dates.format(tempTicket.getDeadline(), 'yyyy-MM-dd')}" />
+																			</div>
+																			<small class="form-text text-muted">Kérjük
+																				töltse ki!</small>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label>Leírás</label>
+																		<textarea class="form-control" name="description"
+																			rows="1" th:text="*{tempTicket.getDescription()}"></textarea>
+																		<small class="form-text text-muted text-left">Kérjük
+																			töltse ki!</small>
+																	</div>																
+																</div>
+															</div>
+																												
+															<div class="modal-footer">
+																<button type="submit" class="btn btn-primary"><b>Módosítás</b></button>	
+																<button type="button" class="btn btn-secondary closeModal"
+																data-dismiss="modal">Bezár</button>		
+															</div>
+														</form>													
+													</div>
+														
+												
+														
+												</div>
+									
+											</div>
+												
+										</div>
+							
 
 
-								</td>
-							</tr>
-
-						</tbody>
-
-					</table>
-
+						
+						<button  data-toggle="modal" data-target="#areYouSureToDelete" 	th:attrappend="data-target=${tempTicket.getId()}">
+							<span>
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  									<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  									<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+								</svg>
+							</span>
+						</button> 
+										<!-- Modal -->
+										<div class="modal fade" id="areYouSureToDelete" tabindex="-1"
+											th:attrappend="id=${tempTicket.getId()}">
+											<div class="modal-dialog modal-confirm">
+												<div class="modal-content">
+													<div class="modal-header bg-warning">
+														<img class="icon img-fluid rounded mx-auto d-block"
+															src="images/icons/alert.svg">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">&times;</button>
+													</div>
+													<div class="modal-body text-center">
+														<h4>Biztos benne?</h4>
+														<p>Biztosan törölni szeretné ezt a hibajegyet?</p>
+														<form name="deleteTicket" th:action="@{/deleteTicket}"
+															method="post">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Bezár</button>
+															<input type="hidden" th:value="*{tempTicket.getId()}"
+																name="id">
+															<button type="submit" class="btn bg-danger">Törlés</button>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 </body>
 
