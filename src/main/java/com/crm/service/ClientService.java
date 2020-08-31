@@ -12,7 +12,6 @@ import com.crm.service.interfaces.IClient;
 @Service
 public class ClientService implements IClient {
 
-	
 	private ClientRepository clientRepository;
 	
 	@Autowired
@@ -25,7 +24,6 @@ public class ClientService implements IClient {
 		clientRepository.save(client);
 		
 	}
-
 
 	@Override
 	public List<Client> findAll() {
