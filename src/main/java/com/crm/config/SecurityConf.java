@@ -26,9 +26,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import com.crm.service.UserDetailsImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
-public class SecurityConf extends WebSecurityConfigurerAdapter {
-	
-
+public class SecurityConf extends WebSecurityConfigurerAdapter {	
 		
 	@Autowired
 	private UserDetailsService userService;
@@ -37,14 +35,9 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 	public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userService);
 	}
-
-
-	
 		
 		@Resource(name="userServiceImpl")
-	    UserDetailsService userDetailsService;
-	     
-	
+	    UserDetailsService userDetailsService;     
 
 		@Bean
 		public static PasswordEncoder passwordEncoder() {
@@ -57,19 +50,15 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		      authenticationProvider.setPasswordEncoder(passwordEncoder());
 		      return authenticationProvider;
 		 }
-
-
 		
 		 @Override
 		    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		        auth.authenticationProvider(authenticationProvider());
-		    }
-	  
+		    }	  
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			
+		http		
 			.authorizeRequests()
 			//oldalak engedélyezése
 			.antMatchers("/console/**").permitAll()
@@ -80,7 +69,6 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/reg").permitAll()
 				.antMatchers("/activation/**").permitAll()
 				.antMatchers("/forgetPassword").permitAll()
-			//	.antMatchers("/forgot-password/**").permitAll()
 				.antMatchers("/reset-password/**").permitAll()
 				.antMatchers("/forgetPasswordAction/**").permitAll()
 				.antMatchers("/resetPassword/**").permitAll()
@@ -119,9 +107,9 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/login?logout")
 				.permitAll();
 		
-		//ezek csak tesztelesre kellenek
+		 //ezek csak tesztelesre kellenek
 		//http.csrf().disable();
-	//	http.headers().frameOptions().disable();
+	   //http.headers().frameOptions().disable();
 		
 	}	
 	 
