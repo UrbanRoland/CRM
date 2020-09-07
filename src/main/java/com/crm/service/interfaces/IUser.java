@@ -26,10 +26,17 @@ public interface IUser {
 	
 	public void updateUserPassword(String password, String passwordConf, String email);
 
-	public void addPhoto(MultipartFile file) throws Exception;
+	public void addPhoto(MultipartFile file,User user) throws Exception;
 	
-	public   Optional<User> findById(Long id);
+	public Optional<User> findById(Long id);
 	
+	public List<User> findAll();
 	
+	public void updateUserRole(Long user_id,Long role_id);
 	
+	public Long findByRoleName(String role);
+	
+	public void deleteUsers_Roles( Long user_id);
+	
+	public void deleteById(Long id);
 }

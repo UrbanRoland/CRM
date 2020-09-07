@@ -40,6 +40,10 @@ public class ErrorPageController implements ErrorController {
 		if (errCode.equals("404")) {
 			return "errorPages/404";
 		}
+		if (errCode.equals("403")) {
+			return "errorPages/403";
+		}
+		
 		
 		return "errorPages/detaildError";
 	}

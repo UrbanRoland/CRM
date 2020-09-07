@@ -1,11 +1,21 @@
 package com.crm.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,6 +31,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,17 +65,17 @@ public class HomeController {
 
 	@Autowired
 	private ClientService clientService;
-	
+
 	@Autowired
 	private TicketService ticketService;
-	
+
 	@Autowired
 	public void setUserService(IUser userService) {
 		this.userService = userService;
 	}
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
 
 	@RequestMapping("addTicket")
 	public String addTicket(Model model) {
@@ -74,7 +85,7 @@ public class HomeController {
 		model.addAttribute("client", allclient);
 		return "addTicket";
 	}
-	
+
 	@PostMapping("/addTicketToDatabase")
 	public String addTicketToDatabase(@ModelAttribute("ticket") @Validated Ticket ticket, BindingResult bindingResult,
 			Client client) {
@@ -82,7 +93,8 @@ public class HomeController {
 		AddTicketValidator validator = new AddTicketValidator();
 
 		if (ticket.getDeadline() == null) {
-		//	bindingResult.rejectValue("deadline", "valid.deadline", "Kötelező kitölteni!");
+			// bindingResult.rejectValue("deadline", "valid.deadline", "Kötelező
+			// kitölteni!");
 		}
 
 		validator.validate(ticket, bindingResult);
@@ -92,7 +104,7 @@ public class HomeController {
 
 		ticket.setCreationDate(LocalDateTime.now());
 		ticket.setStatus("Nyitott");
-		
+
 //System.out.println("A státusz " +ticket.getStatus());
 		ticket.setClient(client);
 
@@ -112,14 +124,14 @@ public class HomeController {
 
 		return "redirect:/addTicket?ticketAddSuccess";
 	}
-	
-	@RequestMapping("listTicket")
+
+	@RequestMapping(value = { "listTicket", "/" })
 	public String listTicket(Model model) {
 		model.addAttribute("tickets", ticketService.findAll());
 		model.addAttribute("ticket", new Ticket());
 		return "listTicket";
 	}
-	
+
 	@PostMapping("/deleteTicket")
 	public String deleteTicket(@ModelAttribute("ticket") Ticket ticket) {
 		ticketService.deleteById(ticket.getId());
@@ -160,7 +172,7 @@ public class HomeController {
 				ticket.getDescription(), ticket.getStatus(), ticket.getDeadline(), user, ticket.getId());
 		return "redirect:/listTicket?ticketUpdateSuccess";
 	}
-	
+
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
@@ -193,6 +205,7 @@ public class HomeController {
 		user.setPasswordConf(encodedPassword);
 
 		userService.registerUser(user);
+
 		return "redirect:/login?needActivation";
 	}
 
@@ -265,10 +278,10 @@ public class HomeController {
 
 	@RequestMapping("settings")
 	public String settings(Model model) {
-		model.addAttribute("user",new User());
+		model.addAttribute("user", new User());
 		return "settings";
 	}
-	
+
 	@PostMapping("/updateUserName")
 	public String updateUserName(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
@@ -290,38 +303,38 @@ public class HomeController {
 
 		return "redirect:/settings?updateUserNameSuccess";
 	}
-	
-		@PostMapping("/updateUserPassword")
-		public String updateUserPassword(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String authenticatedUserEmail = null;
-			if (principal instanceof UserDetails) {
-				authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
-			} else {
-				authenticatedUserEmail = principal.toString();
-			}
+	@PostMapping("/updateUserPassword")
+	public String updateUserPassword(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
-			ResetPassword validator = new ResetPassword();
-
-			validator.validate(user, bindingResult);
-			if (bindingResult.hasErrors()) {
-				return "settings";
-			}
-
-			String encodedPassword = passwordEncoder.encode(user.getPassword());
-
-			userService.updateUserPassword(encodedPassword, encodedPassword, authenticatedUserEmail);
-
-			return "redirect:/settings?updatedUserPasswordSuccess";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String authenticatedUserEmail = null;
+		if (principal instanceof UserDetails) {
+			authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
+		} else {
+			authenticatedUserEmail = principal.toString();
 		}
-	
+
+		ResetPassword validator = new ResetPassword();
+
+		validator.validate(user, bindingResult);
+		if (bindingResult.hasErrors()) {
+			return "settings";
+		}
+
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+
+		userService.updateUserPassword(encodedPassword, encodedPassword, authenticatedUserEmail);
+
+		return "redirect:/settings?updatedUserPasswordSuccess";
+	}
+
 	@RequestMapping("addClient")
 	public String addClient(Model model) {
 		model.addAttribute("client", new Client());
 		return "addClient";
 	}
-	
+
 	@PostMapping("/addToClient")
 	public String addToClient(@ModelAttribute @Validated Client client, BindingResult bindingResult) {
 
@@ -330,27 +343,133 @@ public class HomeController {
 		if (bindingResult.hasErrors()) {
 			return "addClient";
 		}
-		
+
 		clientService.saveClient(client);
 		return "redirect:/addClient?clientAddSuccess";
 	}
-	
+
 	@RequestMapping("uploadImage")
 	public String uploadImage() {
 		return "uploadImage";
 	}
-	
+
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
 		String result = "";
+		System.out.println("A kép neve: " + file.getOriginalFilename());
+		System.out.println("A kép forrása: " + file.toString());
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Long authenticatedUserId = null;
+		if (principal instanceof UserDetails) {
+			authenticatedUserId = ((UserDetailsImpl) principal).getId();
+		} else {
+			authenticatedUserId = (Long) principal;
+		}
+
+		User user = userService.findById(authenticatedUserId).get();
+
+		System.out.println(user.toString());
+
 		try {
-			userService.addPhoto(file);
+			userService.addPhoto(file, user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			log.error("hiba", e);
 
 		}
+
 		return "redirect:/";
 	}
+
+	@RequestMapping("listUsers")
+	public String listUsers(Model model) {
+		model.addAttribute("users", userService.findAll());
+		model.addAttribute("user", new User());
+		return "listUsers";
+	}
+	
+	
+	@PostMapping("/updateUserRole")
+	public String updateUseerRole(@ModelAttribute("user") @Validated User user, BindingResult bindingResult) {
+		
+		UserNameValidator validator = new UserNameValidator();
+		Long user_id=user.getId();
+		
+		validator.validate(user, bindingResult);
+		if (bindingResult.hasErrors()) {
+			return "redirect:/listUsers?updateRoleError";
+		}
+		
+		// a username valtozoba beletoltom a role-t
+		Long role_id=userService.findByRoleName(user.getUsername());
+		userService.updateUserRole(user_id, role_id);
+		return "listUsers";
+	}
+	
+	@PostMapping("/deleteUser")
+	public String deleteUser(@ModelAttribute("user") User user) {
+		userService.deleteUsers_Roles(user.getId());
+		userService.deleteById(user.getId());
+		System.out.println("A user azonositoja:"+ user.getId());
+		return "redirect:/listUsers?userDeleteSuccess";
+	}
+	
+	//lecsereli az ekezetes karakterekete
+	public String stripAccents(String s){
+	    s = Normalizer.normalize(s, Normalizer.Form.NFD);
+	    s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+	    return s;
+	}
+	
+	@GetMapping("/displayPieCharts")
+	public String pieCharts(Model model) {
+		
+	//adatok prioritas alapjan
+	  for (Object[] ob : ticketService.ticketsGroupedByPriority()){
+	        String key = (String)ob[0];
+	        Integer value = ((BigInteger)ob[1]).intValue();
+	    	model.addAttribute(stripAccents(key.replaceAll("\\s+","")), value);
+	    }
+	  //adatok statusz alapjan
+	  for (Object[] ob : ticketService.ticketsGroupedByStatus()){
+	        String key = (String)ob[0];
+	        Integer value = ((BigInteger)ob[1]).intValue();
+	    	model.addAttribute(stripAccents(key), value);
+	    }
+
+	
+		return "pieCharts";
+	}
+	
+	@GetMapping("/displayLineCharts")
+	public String lineCharts(Model model) {
+		
+		  for (Object[] ob : ticketService.ticketGroupedByMonths()){
+		        String key = (String)ob[0];
+		        
+		        switch (key) {
+				case "2020-01": key="jan"; break;
+				case "2020-02": key="feb"; break;		
+				case "2020-03": key="mar"; break;			
+				case "2020-04":	key="apr"; break;
+				case "2020-05":	key="may"; break;				
+				case "2020-06": key="jun"; break;				
+				case "2020-07":	key="jul"; break;							
+				case "2020-08": key="aug"; break;								
+				case "2020-09": key="sep"; break;								
+				case "2020-10": key="oct"; break;								
+				case "2020-11": key="nov"; break;								
+				case "2020-12": key="dec"; break;
+				}
+		        
+		        Integer value = ((BigInteger)ob[1]).intValue();
+		        model.addAttribute(key, value);
+		    
+		    }
+		 
+		return "lineCharts";
+	}
+	
 }

@@ -59,6 +59,12 @@ public class UserDetailsImpl implements UserDetails{
 		return user.getId();
 		
 	}
+	public byte[] getImg() {
+		return user.getImage();
+	}
+	public String getRole() {
+		return user.getRoles().toString();
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {

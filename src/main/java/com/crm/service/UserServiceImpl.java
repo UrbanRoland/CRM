@@ -1,5 +1,6 @@
 package com.crm.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -100,7 +101,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 			word[j] = (char) ('a' + random.nextInt(26));
 		}
 		String toReturn = new String(word);
-		//System.out.println("Aktivációs kód: " + toReturn);
+		System.out.println("Aktivációs kód: " + toReturn);
 		return new String(word);
 	}
 
@@ -190,13 +191,14 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	@Override
-	public void addPhoto(MultipartFile file) throws Exception {
-		
+	public void addPhoto(MultipartFile file,User user) throws Exception {
+		user.setImage(file.getBytes());
+		userRepository.save(user);
 		  String UPLOAD_DIR = "./src/main/resources/static/photos/";
 		byte[] bytes=file.getBytes();
 		Path path=Paths.get(UPLOAD_DIR+file.getOriginalFilename());
  		  Files.write(path, bytes);
-		  
+		 
 	}
 
 	@Override
@@ -204,6 +206,32 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	return userRepository.findById(id);
 	}
 
-	
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public void updateUserRole(Long user_id, Long role_id) {
+		userRepository.updateUserRole(user_id, role_id);
+		
+		
+	}
+	@Override
+	public Long findByRoleName(String role) {
+		 return roleRepository.findByRoleName(role);
+	 }
+
+	@Override
+	public void deleteUsers_Roles(Long user_id) {
+		userRepository.deleteUsers_Roles(user_id);
+		
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);
+		
+	}
 
 }

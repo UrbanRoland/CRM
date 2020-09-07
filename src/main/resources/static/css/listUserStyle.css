@@ -1,0 +1,79 @@
+
+
+body, html {
+	height: 100%;
+	
+}
+
+
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container{
+  width: 100%;
+  
+
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
+
+.wrap-table100 {
+  width: 960px;
+  border-radius: 10px;
+  
+}
+
+tr:hover{
+	background-color: #ececff;
+}
+
+
+.btn-primary{
+	margin-top: 41px;
+	color: #fff;
+    background-color: #727cf5;
+    border-color: #727cf5;
+}
+
+.btn-primary:hover{
+	 background-color: #4E5BF2;
+}
+.dataTables_info{
+	
+	 color:#6C757D;
+}
+
+.col-sm-12{
+	background-color: white;
+}
+.table {
+	background-color: white;
+}
+#export{
+	margin-bottom: 20px;
+}
+.modal-body{
+	height: auto;
+}
+.closeModal{
+	margin-bottom: -31px;
+}

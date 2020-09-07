@@ -1,5 +1,6 @@
 package com.crm.domain;
 
+import java.io.File;
 import java.lang.annotation.Documented;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -47,9 +48,10 @@ public class User {
 	
 	private Boolean enabled;
 	
-
+	@Lob
 	private byte[] image;
 	
+
 
 	public byte[] getImage() {
 		return image;

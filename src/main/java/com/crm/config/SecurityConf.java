@@ -60,6 +60,13 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		http		
 			.authorizeRequests()
 			//oldalak engedélyezése
+			.antMatchers("/listUsers/**").hasAnyAuthority("Vezető")
+			.antMatchers("/lineCharts/**").hasAnyAuthority("Vezető")
+			.antMatchers("/displayLineCharts/**").hasAnyAuthority("Vezető")
+			.antMatchers("/pieCharts/**").hasAnyAuthority("Vezető")
+			.antMatchers("/displayPieCharts/**").hasAnyAuthority("Vezető")
+			
+		
 			.antMatchers("/console/**").permitAll()
 				.regexMatchers(".*\\.css$").permitAll()
 				.regexMatchers(".*\\.js$").permitAll()
@@ -75,14 +82,16 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/errorPages/404").permitAll()
 				.antMatchers("/errorPages/detaildError").permitAll()
 				.antMatchers("/images/**").permitAll()
-		
-			/*	
+				.antMatchers("/updateUserRole/**").permitAll()
+				
+				
+				.antMatchers("/pieCharts/**").permitAll()
 				.antMatchers("/main/**").permitAll()
 				.antMatchers("/addTicket/**").permitAll()
 				.antMatchers("/settings/**").permitAll()
 				
 				.antMatchers("/db/**").permitAll()
-				
+				//.antMatchers("/**").permitAll()
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/addClient/**").permitAll()
 				.antMatchers("/uploadImage/**").permitAll()
@@ -93,7 +102,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/addTicketToDatabase/**").permitAll()
 				.antMatchers("/updateTicket/**").permitAll()
 				.antMatchers("/deleteTicket/**").permitAll()
-				*/
+				
 				.anyRequest().authenticated()
 				.and()
 		
@@ -107,8 +116,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.permitAll();
 		
 		 //ezek csak tesztelesre kellenek
-		//http.csrf().disable();
-	   //http.headers().frameOptions().disable();
+			http.csrf().disable();
+			http.headers().frameOptions().disable();
 		
 	}	
 	 
