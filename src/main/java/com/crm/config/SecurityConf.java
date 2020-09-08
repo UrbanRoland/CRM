@@ -85,8 +85,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/updateUserRole/**").permitAll()
 				
 				
-				.antMatchers("/pieCharts/**").permitAll()
-				.antMatchers("/main/**").permitAll()
+				//.antMatchers("/pieCharts/**").permitAll()
+				/*.antMatchers("/main/**").permitAll()
 				.antMatchers("/addTicket/**").permitAll()
 				.antMatchers("/settings/**").permitAll()
 				
@@ -102,7 +102,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/addTicketToDatabase/**").permitAll()
 				.antMatchers("/updateTicket/**").permitAll()
 				.antMatchers("/deleteTicket/**").permitAll()
-				
+				*/
 				.anyRequest().authenticated()
 				.and()
 		
@@ -116,8 +116,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.permitAll();
 		
 		 //ezek csak tesztelesre kellenek
-			http.csrf().disable();
-			http.headers().frameOptions().disable();
+			//http.csrf().disable();
+			//chttp.headers().frameOptions().disable();
 		
 	}	
 	 
