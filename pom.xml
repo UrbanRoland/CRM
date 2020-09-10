@@ -64,15 +64,15 @@
 		</dependency>
 
 		<!-- Bepitett adatbazis -->
-	 <!--	  	<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+		<!-- <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+			<scope>runtime</scope> </dependency> -->
+		<!-- postgresql adatbazis -->
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
--->
-		<!-- postgresql adatbazis -->
-	<dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
-			<scope>runtime</scope> </dependency> 
 
 		<!-- JPA orm -->
 		<dependency>
@@ -103,6 +103,8 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
+
+
 	</dependencies>
 
 
