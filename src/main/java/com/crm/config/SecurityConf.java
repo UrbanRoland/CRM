@@ -95,7 +95,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/addTicket/**").permitAll()
 				.antMatchers("/settings/**").permitAll()
 				
-				.antMatchers("/db/**").permitAll()
+			
 				//.antMatchers("/**").permitAll()
 				.antMatchers("/addClient/**").permitAll()
 				.antMatchers("/uploadImage/**").permitAll()
