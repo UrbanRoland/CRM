@@ -55,8 +55,13 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		        auth.authenticationProvider(authenticationProvider());
 		    }	  
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		 String[] antMatchers={"/main/**",
+				 "/addTicket/**","/addClient/**","/listTicket/**"
+				 ,"/addTicketToDatabase/**","/pieCharts/**",
+				 "/updateTicket/**","/deleteTicket/**","/settings/**"};
 		http		
 			.authorizeRequests()
 			//oldalak engedélyezése
@@ -84,7 +89,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.antMatchers("/images/**").permitAll()
 				.antMatchers("/updateUserRole/**").permitAll()
 				
-				
+				//.antMatchers(antMatchers).permitAll()
 				//.antMatchers("/pieCharts/**").permitAll()
 				/*.antMatchers("/main/**").permitAll()
 				.antMatchers("/addTicket/**").permitAll()
@@ -92,7 +97,6 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				
 				.antMatchers("/db/**").permitAll()
 				//.antMatchers("/**").permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/addClient/**").permitAll()
 				.antMatchers("/uploadImage/**").permitAll()
 				.antMatchers("/upload/**").permitAll()

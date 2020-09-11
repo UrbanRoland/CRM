@@ -1,6 +1,6 @@
-insert into roles(id,role) values(1,'Vezető');
-insert into roles(id,role) values(2,'Ügyintéző');
-insert into roles(id,role) values(3,'Szerelő');
+insert into roles(role) values('Vezető');
+insert into roles(role) values('Ügyintéző');
+insert into roles(role) values('Szerelő');
 insert into users(email,password,username,enabled) values('urolir@gmail.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland','TRUE');
 insert into users_roles(user_id,role_id) values(1,1);
 insert into users(email,password,username,enabled) values('urolir@gmail2.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland Nagy','TRUE');

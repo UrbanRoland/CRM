@@ -27,7 +27,7 @@ public class EmailService {
 		this.javaMailSender = javaMailSender;
 	}
 
-	// Annak az email cimet varja parameterul aki beregisztrált tehat ez lesz a cimzett
+	// Annak az email cimet varja parameterul aki beregisztralt tehat ez lesz a cimzett
 	public void successRegistration(String email, String key) {
 		SimpleMailMessage message = null;
 		try {
