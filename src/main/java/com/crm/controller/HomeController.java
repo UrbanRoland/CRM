@@ -459,7 +459,8 @@ public class HomeController {
 	@RequestMapping("listClient")
 	public String listClien(Model model) {
 		model.addAttribute("clients", clientService.findAll());
-		model.addAttribute("client", new Ticket());
+		model.addAttribute("client", new Client());
+		
 		return "listClient";
 	}
 	@PostMapping("/updateClient")
@@ -479,6 +480,10 @@ public class HomeController {
 	
 	@PostMapping("/deleteClient")
 	public String deleteClient(@ModelAttribute("client") Client client) {
+		Long id=client.getId();
+	
+		ticketService.deleteTicketByClient_ID(id);
+	
 		clientService.deleteById(client.getId());
 		return "redirect:/listClient?clientDeleteSuccess";
 	}

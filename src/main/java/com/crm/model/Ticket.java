@@ -124,5 +124,12 @@ public class Ticket {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", client=" + client + ", notifier=" + notifier + ", priority=" + priority
+				+ ", title=" + title + ", description=" + description + ", deadline=" + deadline + ", status=" + status
+				+ ", creationDate=" + creationDate + ", user=" + user + "]";
+	}
+
 
 }

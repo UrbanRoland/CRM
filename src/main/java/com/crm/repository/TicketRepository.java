@@ -36,4 +36,12 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 	 		"GROUP BY to_char(creation_date, 'YYYY-MM')",nativeQuery = true)
 	 List<Object[]> ticketGroupedByMonths();
 	 
+	 @Query(value="SELECT title,status, deadline FROM ticket WHERE CLIENT_ID= ?1", nativeQuery = true)
+	 List<Ticket> findTicketByClient_ID(Long client_id);
+	 
+		@Transactional
+		@Modifying
+		@Query(value="DELETE FROM ticket WHERE client_id= ?1",nativeQuery = true)
+	 void deleteTicketByClient_ID(Long client_id);
+	 
 }

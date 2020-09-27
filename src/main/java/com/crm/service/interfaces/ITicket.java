@@ -22,4 +22,8 @@ public interface ITicket {
 	public  List<Object[]>  ticketsGroupedByPriority();
 	
 	public  List<Object[]> ticketGroupedByMonths();
+	
+	public List<Ticket> findTicketByClient_ID(Long client_id);
+	
+	public  void deleteTicketByClient_ID(Long client_id);
 }

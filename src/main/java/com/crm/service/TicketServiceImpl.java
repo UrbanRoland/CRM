@@ -69,4 +69,15 @@ public class TicketServiceImpl implements ITicket {
 		return list;
 	}
 
+	@Override
+	public List<Ticket> findTicketByClient_ID(Long client_id) {
+		return ticketRepository.findTicketByClient_ID(client_id);
+	}
+
+	@Override
+	public void deleteTicketByClient_ID(Long client_id) {
+		ticketRepository.deleteTicketByClient_ID(client_id);
+		
+	}
+
 }

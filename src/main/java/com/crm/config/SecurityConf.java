@@ -76,7 +76,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.regexMatchers(".*\\.css$").permitAll()
 				.regexMatchers(".*\\.js$").permitAll()
 				.antMatchers("/login/**").permitAll()
-			//	.antMatchers("/db/**").permitAll()
+				//.antMatchers("/db/**").permitAll()
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/reg").permitAll()
 				.antMatchers("/activation/**").permitAll()
