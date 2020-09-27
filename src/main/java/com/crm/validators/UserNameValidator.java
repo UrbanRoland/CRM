@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.crm.domain.User;
+import com.crm.model.User;
 
 public class UserNameValidator implements Validator {
 

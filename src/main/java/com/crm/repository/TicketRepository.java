@@ -2,7 +2,7 @@ package com.crm.repository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.transaction.Transactional;
 
@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.crm.domain.Ticket;
-import com.crm.domain.User;
+import com.crm.model.Ticket;
+import com.crm.model.User;
 
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
 

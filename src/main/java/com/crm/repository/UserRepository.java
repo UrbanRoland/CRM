@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.crm.domain.Ticket;
-import com.crm.domain.User;
+import com.crm.model.Ticket;
+import com.crm.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 	

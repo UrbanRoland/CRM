@@ -1,4 +1,4 @@
-package com.crm.domain;
+package com.crm.model;
 
 import java.util.HashSet;
 import java.util.Set;

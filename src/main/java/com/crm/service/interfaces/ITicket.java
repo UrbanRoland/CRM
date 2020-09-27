@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.crm.domain.Ticket;
-import com.crm.domain.User;
+import com.crm.model.Ticket;
+import com.crm.model.User;
 
 public interface ITicket {
 

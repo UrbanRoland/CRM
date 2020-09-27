@@ -6,8 +6,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.crm.service.interfaces.IEmail;
+
 @Service
-public class EmailService {
+public class EmailServiceImpl implements IEmail {
 
 
 	@Value("${spring.mail.username}")
@@ -28,6 +30,7 @@ public class EmailService {
 	}
 
 	// Annak az email cimet varja parameterul aki beregisztralt tehat ez lesz a cimzett
+	@Override
 	public void successRegistration(String email, String key) {
 		SimpleMailMessage message = null;
 		try {
@@ -46,7 +49,7 @@ public class EmailService {
 		System.out.println("Hiba az email küldésekor az alábbi címre: " + email + " " + e);
 		}
 	}
-
+	@Override
 	public void sendLinkToUser(String email,String link) {
 		SimpleMailMessage message = null;
 		try {
@@ -65,7 +68,7 @@ public class EmailService {
 			System.out.println("Hiba az email küldésekor az alábbi címre: " + email + " " + e);
 		}
 	}
-	
+	@Override
 	public void changedPassword(String email) {
 		SimpleMailMessage message = null;
 		try {

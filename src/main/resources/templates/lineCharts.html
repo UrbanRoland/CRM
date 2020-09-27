@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html layout:decorator="layouts/main">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymleaf.org" layout:decorator="layouts/main"
+	xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Kimutatások</title>
 <meta charset="UTF-8">
+
 <!--===============================================================================================-->
-<link rel="icon" type="image/svg" href="images/icons/lineChart.svg" />
+		<link rel="icon" type="image/svg" href="images/icons/lineChart.svg" />
 <!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="css/lineChartStyle.css">
+<!--===============================================================================================-->
+
 </head>
 <body>
 	<div layout:fragment="content">
 		<div class="page-content p-5" id="content">
 			<div class="card">
-				<figure class="highcharts-figure">
-					<div id="container"></div>
-					
-				</figure>
+				<div class="card-body">
+					<figure class="highcharts-figure">
+						<div id="container"></div>
+					</figure>
+				</div>
 			</div>
-
-
 		</div>
+			<div th:insert="layouts/lineChartsScripts ::highchartScripts"></div>
 	</div>
-
-
 </body>
 </html>

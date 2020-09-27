@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.crm.domain.User;
+import com.crm.model.User;
 
 public interface IUser {
 

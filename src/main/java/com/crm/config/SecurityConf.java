@@ -59,7 +59,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		 String[] antMatchers={"/main/**",
-				 "/addTicket/**","/addClient/**","/listTicket/**"
+				 "/addTicket/**","/addClient/**","/listTicket/**","listClien/**"
 				 ,"/addTicketToDatabase/**","/pieCharts/**",
 				 "/updateTicket/**","/deleteTicket/**","/settings/**"};
 		http		
@@ -76,6 +76,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.regexMatchers(".*\\.css$").permitAll()
 				.regexMatchers(".*\\.js$").permitAll()
 				.antMatchers("/login/**").permitAll()
+			//	.antMatchers("/db/**").permitAll()
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/reg").permitAll()
 				.antMatchers("/activation/**").permitAll()
@@ -120,8 +121,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.permitAll();
 		
 		 //ezek csak tesztelesre kellenek
-			http.csrf().disable();
-			http.headers().frameOptions().disable();
+			//http.csrf().disable();
+			//http.headers().frameOptions().disable();
 		
 	}	
 	 

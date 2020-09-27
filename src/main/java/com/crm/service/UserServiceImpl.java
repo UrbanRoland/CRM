@@ -22,8 +22,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.crm.domain.User;
-import com.crm.domain.Role;
+import com.crm.model.Role;
+import com.crm.model.User;
 import com.crm.repository.RoleRepository;
 import com.crm.repository.UserRepository;
 import com.crm.service.interfaces.IUser;
@@ -35,12 +35,12 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	private final String USER_ROLE = "Ügyintéző";
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
-	private EmailService emailService;
+	private EmailServiceImpl emailService;
 
 
 	
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,EmailService emailService) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,EmailServiceImpl emailService) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.emailService = emailService;

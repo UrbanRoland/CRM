@@ -4,8 +4,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.crm.domain.Client;
-import com.crm.domain.Ticket;
+import com.crm.model.Client;
+import com.crm.model.Ticket;
 
 public class UpdateTicketValidator  implements Validator {
 

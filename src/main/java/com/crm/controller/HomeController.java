@@ -1,31 +1,19 @@
 package com.crm.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.text.Normalizer;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,24 +23,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.crm.domain.Client;
-import com.crm.domain.Ticket;
-import com.crm.domain.User;
-import com.crm.service.ClientService;
-import com.crm.service.TicketService;
+import com.crm.model.Client;
+import com.crm.model.Ticket;
+import com.crm.model.User;
+import com.crm.service.ClientServiceImpl;
+import com.crm.service.TicketServiceImpl;
 import com.crm.service.UserDetailsImpl;
 import com.crm.service.interfaces.IUser;
 import com.crm.validators.AddTicketValidator;
 import com.crm.validators.ClientValidator;
-import com.crm.validators.ForgetPassword;
 import com.crm.validators.RegValidator;
 import com.crm.validators.ResetPassword;
 import com.crm.validators.UpdateTicketValidator;
@@ -64,10 +49,10 @@ public class HomeController {
 	private IUser userService;
 
 	@Autowired
-	private ClientService clientService;
+	private ClientServiceImpl clientService;
 
 	@Autowired
-	private TicketService ticketService;
+	private TicketServiceImpl ticketService;
 
 	@Autowired
 	public void setUserService(IUser userService) {
@@ -148,7 +133,7 @@ public class HomeController {
 			return "redirect:/listTicket?updateError";
 		}
 
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Long authenticatedUserId = null;
@@ -355,7 +340,7 @@ public class HomeController {
 
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
-		String result = "";
+		//String result = "";
 		System.out.println("A kép neve: " + file.getOriginalFilename());
 		System.out.println("A kép forrása: " + file.toString());
 
@@ -471,5 +456,32 @@ public class HomeController {
 		 
 		return "lineCharts";
 	}
+	@RequestMapping("listClient")
+	public String listClien(Model model) {
+		model.addAttribute("clients", clientService.findAll());
+		model.addAttribute("client", new Ticket());
+		return "listClient";
+	}
+	@PostMapping("/updateClient")
+	public String updateClient(@ModelAttribute("client") @Validated Client client, BindingResult bindingResult) {
+
+		ClientValidator validator = new ClientValidator();
+
+		validator.validate(client, bindingResult);
+		if (bindingResult.hasErrors()) {
+
+			return "redirect:/listClient?updateError";
+		}
+
+		clientService.updateClient(client.getAddress(), client.getCity(), client.getContactPerson(), client.getEmail(),  client.getMonthlyFee(), client.getName(), client.getPhone(), client.getTaxnumber(), client.getZipCode(), client.getId());
+		return "redirect:/listClinet?clientUpdateSuccess";
+	}
 	
+	@PostMapping("/deleteClient")
+	public String deleteClient(@ModelAttribute("client") Client client) {
+		clientService.deleteById(client.getId());
+		return "redirect:/listClient?clientDeleteSuccess";
+	}
+
+
 }

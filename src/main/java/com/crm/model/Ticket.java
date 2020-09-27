@@ -1,4 +1,4 @@
-package com.crm.domain;
+package com.crm.model;
 
 import java.time.LocalDateTime;
 import java.util.Date;

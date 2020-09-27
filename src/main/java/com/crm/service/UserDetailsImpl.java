@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.crm.domain.Role;
-import com.crm.domain.User;
+import com.crm.model.Role;
+import com.crm.model.User;
 
 
 public class UserDetailsImpl implements UserDetails{
