@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,8 +25,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
+import com.crm.model.AuditImpl;
 import com.crm.service.UserDetailsImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableJpaAuditing
 @Configuration
 public class SecurityConf extends WebSecurityConfigurerAdapter {	
 		
@@ -54,66 +58,75 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 		 @Override
 		    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		        auth.authenticationProvider(authenticationProvider());
-		    }	  
+		    }	
+		 
+		 @Bean
+		  public AuditorAware<String> auditorProvider() {
+		    return new AuditImpl();
+		  }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		 String[] antMatchers={"/main/**",
-				 "/addTicket/**","/addClient/**","/listTicket/**","listClien/**"
-				 ,"/addTicketToDatabase/**","/pieCharts/**",
-				 "/updateTicket/**","/deleteTicket/**","/settings/**"};
+		 String[] allowedForEveryone={"/main/**",
+				 "default","/settings","/login","/registration","/reg",
+				 "/forgetPassword","/reset-password",
+				 "/forgetPasswordAction","/confirm-reset",
+				 "/errorPages/detaildError","/activation/**"};
+		 
+		 String[] allowedForAuthenticatedUsers= {
+				 "updateUserPicture/**","updateUserPassword/**","updateProfile/**",
+				 "updateTicket","deleteTicket","forwardTicket","editTicket/**","userData/**",
+				 
+				 
+		 };
+		 
 		http		
 			.authorizeRequests()
-			//oldalak engedélyezése
-			.antMatchers("/listUsers/**").hasAnyAuthority("Vezető")
-			.antMatchers("/lineCharts/**").hasAnyAuthority("Vezető")
-			.antMatchers("/displayLineCharts/**").hasAnyAuthority("Vezető")
-			.antMatchers("/pieCharts/**").hasAnyAuthority("Vezető")
-			.antMatchers("/displayPieCharts/**").hasAnyAuthority("Vezető")
+			//oldalak engedelyezese a megfelelo csoport szamara
+			.antMatchers("/listUsers").hasAnyAuthority("Vezető")
+			.antMatchers("/lineCharts").hasAnyAuthority("Vezető")
+			.antMatchers("/displayLineCharts").hasAnyAuthority("Vezető")
+			.antMatchers("/pieCharts").hasAnyAuthority("Vezető")
+			.antMatchers("/pieCharts").hasAnyAuthority("Vezető")
+			.antMatchers("/displayPieCharts").hasAnyAuthority("Vezető")
+			.antMatchers("/updateUserRole").hasAnyAuthority("Vezető")
+			.antMatchers(allowedForAuthenticatedUsers).hasAnyAuthority("Vezető")
+		
 			
+			
+			.antMatchers("/listTicket").hasAnyAuthority("Vezető,Ügyintéző")
+			.antMatchers("/addTicket").hasAnyAuthority("Vezető,Ügyintéző")
+			.antMatchers("/addTicketToDatabase").hasAnyAuthority("Vezető,Ügyintéző")		
+			.antMatchers("/listClient").hasAnyAuthority("Vezető,Ügyintéző")
+			.antMatchers("/addClient").hasAnyAuthority("Vezető,Ügyintéző")
+			.antMatchers("/editClient/**").hasAnyAuthority("Vezető,Ügyintéző")
+			
+			.antMatchers(allowedForAuthenticatedUsers).hasAnyAuthority("Ügyintéző")
+			
+			.antMatchers("/listTicketDev").hasAnyAuthority("Vezető,Fejlesztő")
+			.antMatchers("/forwardTicketDev").hasAnyAuthority("Vezető,Fejlesztő")
+			.antMatchers(allowedForAuthenticatedUsers).hasAnyAuthority("Fejlesztő")
+			
+			.antMatchers("/listTicketTest").hasAnyAuthority("Vezető,Tesztelő")
+			.antMatchers("/forwardTicketTest").hasAnyAuthority("Vezető,Tesztelő")
+			.antMatchers(allowedForAuthenticatedUsers).hasAnyAuthority("Tesztelő")
+			
+			.antMatchers("/listTicketMech").hasAnyAuthority("Vezető,Szerelő")
+			.antMatchers("/forwardTicketMech").hasAnyAuthority("Vezető,Szerelő")
+			.antMatchers(allowedForAuthenticatedUsers).hasAnyAuthority("Szerelő")
 		
 			.antMatchers("/console/**").permitAll()
 				.regexMatchers(".*\\.css$").permitAll()
-				.regexMatchers(".*\\.js$").permitAll()
-				.antMatchers("/login/**").permitAll()
-				//.antMatchers("/db/**").permitAll()
-				.antMatchers("/registration").permitAll()
-				.antMatchers("/reg").permitAll()
-				.antMatchers("/activation/**").permitAll()
-				.antMatchers("/forgetPassword").permitAll()
-				.antMatchers("/reset-password/**").permitAll()
-				.antMatchers("/forgetPasswordAction/**").permitAll()
-				.antMatchers("/resetPassword/**").permitAll()
-				.antMatchers("/confirm-reset/**").permitAll()
-				.antMatchers("/errorPages/404").permitAll()
-				.antMatchers("/errorPages/detaildError").permitAll()
+				.regexMatchers(".*\\.js$").permitAll()	
+				.antMatchers("/db/**").permitAll()				
 				.antMatchers("/images/**").permitAll()
-				.antMatchers("/updateUserRole/**").permitAll()
-				
-				//.antMatchers(antMatchers).permitAll()
-				//.antMatchers("/pieCharts/**").permitAll()
-				/*.antMatchers("/main/**").permitAll()
-				.antMatchers("/addTicket/**").permitAll()
-				.antMatchers("/settings/**").permitAll()
-				
-			
-				//.antMatchers("/**").permitAll()
-				.antMatchers("/addClient/**").permitAll()
-				.antMatchers("/uploadImage/**").permitAll()
-				.antMatchers("/upload/**").permitAll()
-				.antMatchers("/addToClient/**").permitAll()
-				.antMatchers("/listTicket/**").permitAll()
-				.antMatchers("/test/**").permitAll()
-				.antMatchers("/addTicketToDatabase/**").permitAll()
-				.antMatchers("/updateTicket/**").permitAll()
-				.antMatchers("/deleteTicket/**").permitAll()
-			*/
+				.antMatchers(allowedForEveryone).permitAll()
 				.anyRequest().authenticated()
 				.and()
 		
 			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/listTicket",true)
+				.defaultSuccessUrl("/default",true)
 				.permitAll()
 				.and()
 			.logout()
@@ -121,8 +134,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 				.permitAll();
 		
 		 //ezek csak tesztelesre kellenek
-			//http.csrf().disable();
-			//http.headers().frameOptions().disable();
+			http.csrf().disable();
+			http.headers().frameOptions().disable();
 		
 	}	
 	 

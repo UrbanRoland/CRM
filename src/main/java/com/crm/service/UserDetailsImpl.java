@@ -55,13 +55,15 @@ public class UserDetailsImpl implements UserDetails{
 		return user.getUsername();
 		
 	}
+	
+	public Boolean getImage() {
+		return user.getImage();
+	}
 	public Long getId() {
 		return user.getId();
 		
 	}
-	public byte[] getImg() {
-		return user.getImage();
-	}
+	
 	public String getRole() {
 		return user.getRoles().toString();
 	}

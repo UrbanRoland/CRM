@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -71,7 +72,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 
 	@Override
 	public void registerUser(User userToRegister) {
-		User userCheck = userRepository.findByEmail(userToRegister.getEmail());
+		//User userCheck = userRepository.findByEmail(userToRegister.getEmail());
 
 		// if (userCheck != null);
 
@@ -84,8 +85,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 		String key = generateKey();
 		userToRegister.setEnabled(false);
 		userToRegister.setActivation(key);
-		
-	
+		userToRegister.setImage(false);	
 
 		userRepository.save(userToRegister);
 	    emailService.successRegistration(userToRegister.getEmail(),key);
@@ -178,32 +178,32 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	@Override
-	public void updateUserName(String username, String email) {
-		userRepository.updateUserName(username, email);
+	public void updateUserNameAndEmail(User modifiledUser, User oldUser) {
+		
+		modifiledUser.setUsername(oldUser.getUsername());
+		modifiledUser.setEmail(oldUser.getEmail());
+
+		userRepository.save(modifiledUser);
 		
 	}
 
 	@Override
-	public void updateUserPassword(String password, String passwordConf, String email) {
-		userRepository.updateUserPassword(password, passwordConf, email);
-		emailService.changedPassword(email);
+	public void updateUserPassword(User modifiledUser, User oldUser) {
+		
+		modifiledUser.setPassword(oldUser.getPassword());
+		modifiledUser.setPasswordConf(oldUser.getPasswordConf());
+
+		userRepository.save(modifiledUser);
+		
+		emailService.changedPassword(modifiledUser.getEmail());
 		
 	}
 
-	@Override
-	public void addPhoto(MultipartFile file,User user) throws Exception {
-		user.setImage(file.getBytes());
-		userRepository.save(user);
-		  String UPLOAD_DIR = "./src/main/resources/static/photos/";
-		byte[] bytes=file.getBytes();
-		Path path=Paths.get(UPLOAD_DIR+file.getOriginalFilename());
- 		  Files.write(path, bytes);
-		 
-	}
+
 
 	@Override
-	public Optional<User> findById(Long id) {
-	return userRepository.findById(id);
+	public User findById(Long id) {
+	return userRepository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -231,6 +231,33 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	@Override
 	public void deleteById(Long id) {
 		userRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public List<String> findRolesWithoutVezetoandUgyintezo() {
+		return roleRepository.findRolesWithoutVezetoandUgyintezo();
+	}
+
+	@Override
+	public void save(User u) {
+		userRepository.save(u);	
+	}
+
+	@Override
+	public void addPhoto(MultipartFile file, User user) throws Exception {
+		
+		 String UPLOAD_DIR = "./src/main/resources/static/photos/";
+		 Path rootLocation;
+		 rootLocation = Paths.get(UPLOAD_DIR);		
+		
+		String filename = user.getId()+"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+	
+		Files.copy(file.getInputStream(), rootLocation.resolve(filename),
+                StandardCopyOption.REPLACE_EXISTING); 
+	
+		user.setImage(true);
+		userRepository.save(user);
 		
 	}
 

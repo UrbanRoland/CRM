@@ -2,13 +2,16 @@ package com.crm.validators;
 
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.crm.model.User;
 
-public class ResetPassword implements Validator{
+@Component
+public class PasswordVaidator implements Validator{
+	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return User.class.equals(clazz);
@@ -16,11 +19,10 @@ public class ResetPassword implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "valid.password", "Kötlező kitölteni!");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConf", "valid.passwordConf", "Kötlező kitölteni!");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "passwordCannotBeEmpty", "Kötlező kitölteni!");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConf", "passwordConfCannotBeEmpty", "Kötlező kitölteni!");
 
 		User user = (User) target;
-
 	
 		
 		if (user.getPassword().length()<5) {
@@ -28,7 +30,8 @@ public class ResetPassword implements Validator{
 		}
 		
 		if (!user.getPassword().equals(user.getPasswordConf())) {
-			errors.rejectValue("passwordConf", "valid.passwordConfDiff", "A két jelszó nem egyezzik meg!");
+			errors.rejectValue("password", "passwordsDoNotMatch", "A két jelszó nem egyezzik meg!");
+			errors.rejectValue("passwordConf", "passwordsDoNotMatch", "A két jelszó nem egyezzik meg!");
 		}
 	
 

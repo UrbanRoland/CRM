@@ -2,7 +2,7 @@ package com.crm.controller;
 
 import java.math.BigInteger;
 import java.text.Normalizer;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,32 +38,79 @@ import com.crm.model.User;
 import com.crm.service.ClientServiceImpl;
 import com.crm.service.TicketServiceImpl;
 import com.crm.service.UserDetailsImpl;
-import com.crm.service.interfaces.IUser;
+import com.crm.service.UserServiceImpl;
 import com.crm.validators.AddTicketValidator;
 import com.crm.validators.ClientValidator;
-import com.crm.validators.RegValidator;
-import com.crm.validators.ResetPassword;
+import com.crm.validators.PasswordVaidator;
 import com.crm.validators.UpdateTicketValidator;
-import com.crm.validators.UserNameValidator;
+import com.crm.validators.UserDataValidator;
+import com.crm.validators.UserRegistrationValidator;
 
 @Controller
 public class HomeController {
+	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	private IUser userService;
-
+	
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	//services
 	private ClientServiceImpl clientService;
-
-	@Autowired
 	private TicketServiceImpl ticketService;
-
+	private UserServiceImpl userService;
+	
+	
 	@Autowired
-	public void setUserService(IUser userService) {
+	public void setClientService(ClientServiceImpl clientService) {
+		this.clientService = clientService;
+	}
+	
+	@Autowired
+	public void setTicketService(TicketServiceImpl ticketService) {
+		this.ticketService = ticketService;
+	}
+	
+	
+	@Autowired
+	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 
+
+
+	//validators
+	private UserDataValidator userDataValidator;
+	private PasswordVaidator passwordVaidator;
+	private UserRegistrationValidator userRegistrationValidator;
+	private UpdateTicketValidator updateTicketValidator;
+	private ClientValidator clientValidator;
+	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	public void setUserDataValidator(UserDataValidator userDataValidator) {
+		this.userDataValidator = userDataValidator;
+	}
+	
+	@Autowired
+	public void setPasswordVaidator(PasswordVaidator passwordVaidator) {
+		this.passwordVaidator = passwordVaidator;
+	}	
+	
+	@Autowired
+	public void setUserRegistrationValidator(UserRegistrationValidator userRegistrationValidator) {
+		this.userRegistrationValidator = userRegistrationValidator;
+	}
+	
+	@Autowired
+	public void setUpdateTicketValidator(UpdateTicketValidator updateTicketValidator) {
+		this.updateTicketValidator = updateTicketValidator;
+	}
+
+	@Autowired
+	public void setClientValidator(ClientValidator clientValidator) {
+		this.clientValidator = clientValidator;
+	}
+	
+	
 
 	@RequestMapping("addTicket")
 	public String addTicket(Model model) {
@@ -87,7 +137,7 @@ public class HomeController {
 			return "addTicket";
 		}
 
-		ticket.setCreationDate(LocalDateTime.now());
+		//ticket.setCreationDate(LocalDateTime.now());
 		ticket.setStatus("Nyitott");
 
 //System.out.println("A státusz " +ticket.getStatus());
@@ -102,7 +152,7 @@ public class HomeController {
 			authenticatedUserId = (Long) principal;
 		}
 
-		User user = userService.findById(authenticatedUserId).get();
+		User user = userService.findById(authenticatedUserId);
 		ticket.setUser(user);
 
 		ticketService.saveTicket(ticket);
@@ -114,50 +164,155 @@ public class HomeController {
 	public String listTicket(Model model) {
 		model.addAttribute("tickets", ticketService.findAll());
 		model.addAttribute("ticket", new Ticket());
+		model.addAttribute("roles", userService.findRolesWithoutVezetoandUgyintezo());
 		return "listTicket";
 	}
-
+	
+	
+	@PostMapping("/forwardTicket")
+	public String forwardTicket(@ModelAttribute("ticket") Ticket ticket) {
+		//System.out.println("Azonosító: "+ticket.getId());
+		//System.out.println("Csoport: "+ticket.getTitle());
+		String group=ticket.getTitle();
+		if(group==null) {
+			return "redirect:/listTicket?ticketForwardedError";
+		}
+		
+		ticketService.updateTicketGroup(group,true ,ticket.getId());
+		return "redirect:/listTicket?ticketForwardedSuccess";
+	}
+	
+	@PostMapping("/forwardTicketDev")
+	public String forwardTicketDev(@ModelAttribute("ticket") Ticket ticket) {
+		
+		String group=ticket.getTitle();
+		if(group==null) {return "redirect:/listTicketDev?ticketForwardedError";}
+		
+		ticketService.updateTicketGroup(group,true ,ticket.getId());
+		return "redirect:/listTicketDev?ticketForwardedSuccess";
+	}
+	@PostMapping("/forwardTicketMech")
+	public String forwardTicketMech(@ModelAttribute("ticket") Ticket ticket) {
+		
+		String group=ticket.getTitle();
+		if(group==null) {return "redirect:/listTicketMech?ticketForwardedError";}
+		
+		ticketService.updateTicketGroup(group,true ,ticket.getId());
+		return "redirect:/listTicketMech?ticketForwardedSuccess";
+	}
+	@PostMapping("/forwardTicketTest")
+	public String forwardTicketTest(@ModelAttribute("ticket") Ticket ticket) {
+		
+		String group=ticket.getTitle();
+		if(group==null) {return "redirect:/listTicketTest?ticketForwardedError";}
+		
+		ticketService.updateTicketGroup(group,true ,ticket.getId());
+		return "redirect:/listTicketTest?ticketForwardedSuccess";
+	}
+	
+	
+	
 	@PostMapping("/deleteTicket")
 	public String deleteTicket(@ModelAttribute("ticket") Ticket ticket) {
 		ticketService.deleteById(ticket.getId());
 		return "redirect:/listTicket?ticketDeleteSuccess";
 	}
-
-	@PostMapping("/updateTicket")
-	public String updateTicket(@ModelAttribute("ticket") @Validated Ticket ticket, BindingResult bindingResult) {
-
-		Date date = ticket.getDeadline();
-
-		if (date == null) {
-
-			return "redirect:/listTicket?updateError";
-		}
-
-		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long authenticatedUserId = null;
-		if (principal instanceof UserDetails) {
-			authenticatedUserId = ((UserDetailsImpl) principal).getId();
-		} else {
-			authenticatedUserId = (Long) principal;
-		}
-
-		User user = userService.findById(authenticatedUserId).get();
-
-		UpdateTicketValidator validator = new UpdateTicketValidator();
-
-		validator.validate(ticket, bindingResult);
+	  @GetMapping("/userData/{id}")
+	    public String userData(@PathVariable Long id, Model model){
+		  User user=userService.findById(id);
+		  model.addAttribute("userData",user );
+		  return "userData";
+	  }
+	  
+	  
+	  @GetMapping("/editClient/{id}")
+	    public String editClient(@PathVariable Long id, Model model){
+		  
+		  Client client = clientService.findById(id);
+			model.addAttribute("editClient",client );
+		  return "editClient";
+	  }
+	  
+	  @PostMapping("/editClient/{id}")
+	    public String updateClient(@ModelAttribute("editClient") @Validated Client editClient,BindingResult bindingResult){
+		  
+		  	Client editedClient = clientService.findById(editClient.getId());
+			
+		  	clientValidator.validate(editClient, bindingResult);
+			if (bindingResult.hasErrors()) {
+				return "editClient";
+			}
+			
+			clientService.updateClient(editedClient, editClient);
+			
+		  return "redirect:/listClient?clientUpdateSuccess";
+	  }
+	  
+	  @GetMapping("/editTicket/{id}")
+	    public String editTicket(@PathVariable Long id, Model model){
+		  
+		  User authenticatedUser=userService.findById(authenticatedUserId());
+		  
+	      Ticket ticket = ticketService.findById(id).get();
+	     	      
+	   //csak az elerheto hibajegyeket tudjak modositani
+	       if((( (ticket.getUserGroup()==null && (authenticatedUser.getRoles().toString().equals("[Fejlesztő]"))) || (authenticatedUser.getRoles().toString().equals("[Fejlesztő]") && !ticket.getUserGroup().equals("Fejlesztő")))
+	    		|| (ticket.getUserGroup()==null && (authenticatedUser.getRoles().toString().equals("[Szerelő]"))) || (authenticatedUser.getRoles().toString().equals("[Szerelő]") && !ticket.getUserGroup().equals("Szerelő"))) ||
+	    		((ticket.getUserGroup()==null && (authenticatedUser.getRoles().toString().equals("[Tesztelő]"))) || (authenticatedUser.getRoles().toString().equals("[Tesztelő]") && !ticket.getUserGroup().equals("Tesztelő")))) {	    	   
+	    	   	return "redirect:/listTicket";   
+	       }
+	        
+	        User user= userService.findById(ticket.getUser().getId());
+	    	model.addAttribute("editTicket",ticket );
+	    	model.addAttribute("editedTicket", new Ticket());
+	    	model.addAttribute("user",user );
+	    	model.addAttribute("modifiedUserAndDate",ticketService.modifiedUserAndDate(id));
+	    	
+	    	
+	    	modifiedUserAndDate(model,id);
+	    	
+	    	
+	        return "editTicket";
+	    }
+	  
+	@PostMapping("/editTicket/{id}")
+	public String updateTicket(@ModelAttribute("editTicket") @Validated Ticket editTicket,BindingResult bindingResult,
+			Model model) {
+	
+		Ticket editedTicket = ticketService.findById(editTicket.getId()).get();
+		
+		User user= userService.findById(editedTicket.getUser().getId());
+	
+		model.addAttribute("user",user );
+		model.addAttribute("modifiedUserAndDate",ticketService.modifiedUserAndDate(editTicket.getId()));
+		modifiedUserAndDate(model,editedTicket.getId());
+		updateTicketValidator.validate(editTicket, bindingResult);
 		if (bindingResult.hasErrors()) {
-
-			return "redirect:/listTicket?updateError";
+		
+			return "editTicket";
 		}
+	
+	 
+		ticketService.updateTicket(editedTicket, editTicket);
+		   
 
-		ticketService.updateTicket(ticket.getNotifier(), ticket.getPriority(), ticket.getTitle(),
-				ticket.getDescription(), ticket.getStatus(), ticket.getDeadline(), user, ticket.getId());
-		return "redirect:/listTicket?ticketUpdateSuccess";
+		User authenticatedUser=userService.findById(authenticatedUserId());
+		
+		if (authenticatedUser.getRoles().toString().equals("[Fejlesztő]")) {
+			
+			return "redirect:/listTicketDev?ticketUpdateSuccess";
+		}else if(authenticatedUser.getRoles().toString().equals("[Tesztelő]")){
+			return "redirect:/listTicketTest?ticketUpdateSuccess";
+		}else if(authenticatedUser.getRoles().toString().equals("[Szerelő]")){
+			return "redirect:/listTicketMech?ticketUpdateSuccess";
+		}else {
+			return "redirect:/listTicket?ticketUpdateSuccess";
+		}
+		
 	}
 
+	
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
@@ -172,15 +327,7 @@ public class HomeController {
 	@PostMapping("/reg")
 	public String reg(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
-		RegValidator validator = new RegValidator();
-
-		for (int i = 0; i < userService.allEmail().size(); i++) {
-			if (user.getEmail().equals(userService.allEmail().get(i))) {
-				bindingResult.rejectValue("email", "valid.email", "Ez az email cím már foglalt!");
-			}
-		}
-
-		validator.validate(user, bindingResult);
+		userRegistrationValidator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
@@ -237,8 +384,8 @@ public class HomeController {
 
 		}
 
-		ResetPassword validator = new ResetPassword();
-		validator.validate(user, bindingResult);
+		
+		passwordVaidator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "resetPassword";
 		}
@@ -264,54 +411,66 @@ public class HomeController {
 	@RequestMapping("settings")
 	public String settings(Model model) {
 		model.addAttribute("user", new User());
+		
 		return "settings";
 	}
 
-	@PostMapping("/updateUserName")
+	@PostMapping("/updateProfile")
 	public String updateUserName(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String authenticatedUserEmail = null;
-		if (principal instanceof UserDetails) {
-			authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
-		} else {
-			authenticatedUserEmail = principal.toString();
-		}
-
-		UserNameValidator validator = new UserNameValidator();
-		validator.validate(user, bindingResult);
+		userDataValidator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "settings";
 		}
 
-		userService.updateUserName(user.getUsername(), authenticatedUserEmail);
-
-		return "redirect:/settings?updateUserNameSuccess";
+		
+		User modifiledUser=userService.findById(authenticatedUserId());
+		userService.updateUserNameAndEmail(modifiledUser, user);
+		
+		return "redirect:/settings?updateProfileSuccess";
 	}
+	
+	@PostMapping("/updateUserPicture")
+	public String updateProfilePicture(@RequestParam("file") MultipartFile file) {
+
+		if(file.isEmpty()) {
+			return "redirect:/settings?updateError";
+		}
+
+		User modifiledUser=userService.findById(authenticatedUserId());	
+		
+		try {
+			userService.addPhoto(file, modifiledUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// auditalas kijatszasa
+		modifiledUser.setImage(false);
+		userService.save(modifiledUser);
+		modifiledUser.setImage(true);
+		userService.save(modifiledUser);		
+		
+		return "redirect:/settings?profilePictureUploadSuccess";
+}
+	
 
 	@PostMapping("/updateUserPassword")
 	public String updateUserPassword(@ModelAttribute @Validated User user, BindingResult bindingResult) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String authenticatedUserEmail = null;
-		if (principal instanceof UserDetails) {
-			authenticatedUserEmail = ((UserDetailsImpl) principal).getUserEmail();
-		} else {
-			authenticatedUserEmail = principal.toString();
-		}
-
-		ResetPassword validator = new ResetPassword();
-
-		validator.validate(user, bindingResult);
+		passwordVaidator.validate(user, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "settings";
 		}
 
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword( passwordEncoder.encode(user.getPassword()));
+		user.setPasswordConf(passwordEncoder.encode(user.getPasswordConf()));
+		
+		User modifiledUser=userService.findById(authenticatedUserId());
+		
+		userService.updateUserPassword(modifiledUser,user);
 
-		userService.updateUserPassword(encodedPassword, encodedPassword, authenticatedUserEmail);
-
-		return "redirect:/settings?updatedUserPasswordSuccess";
+		return "redirect:/settings?updateUserPasswordSuccess";
 	}
 
 	@RequestMapping("addClient")
@@ -352,7 +511,7 @@ public class HomeController {
 			authenticatedUserId = (Long) principal;
 		}
 
-		User user = userService.findById(authenticatedUserId).get();
+		User user = userService.findById(authenticatedUserId);
 
 		System.out.println(user.toString());
 
@@ -377,20 +536,20 @@ public class HomeController {
 	
 	
 	@PostMapping("/updateUserRole")
-	public String updateUseerRole(@ModelAttribute("user") @Validated User user, BindingResult bindingResult) {
-		
-		UserNameValidator validator = new UserNameValidator();
-		Long user_id=user.getId();
-		
-		validator.validate(user, bindingResult);
-		if (bindingResult.hasErrors()) {
-			return "redirect:/listUsers?updateRoleError";
-		}
-		
+	public String updateUseerRole(@ModelAttribute("user") @Validated User user) {
+
+		User modifiledUser=userService.findById(user.getId());
+
 		// a username valtozoba beletoltom a role-t
 		Long role_id=userService.findByRoleName(user.getUsername());
-		userService.updateUserRole(user_id, role_id);
-		return "listUsers";
+	
+		userService.updateUserRole(user.getId(), role_id);
+		
+		modifiledUser.setImage(false);
+		userService.save(modifiledUser);
+		modifiledUser.setImage(true);
+		userService.save(modifiledUser);
+		return "redirect:/listUsers?updateUserRoleSuccess";
 	}
 	
 	@PostMapping("/deleteUser")
@@ -459,24 +618,11 @@ public class HomeController {
 	@RequestMapping("listClient")
 	public String listClien(Model model) {
 		model.addAttribute("clients", clientService.findAll());
-		model.addAttribute("client", new Client());
+		
 		
 		return "listClient";
 	}
-	@PostMapping("/updateClient")
-	public String updateClient(@ModelAttribute("client") @Validated Client client, BindingResult bindingResult) {
 
-		ClientValidator validator = new ClientValidator();
-
-		validator.validate(client, bindingResult);
-		if (bindingResult.hasErrors()) {
-
-			return "redirect:/listClient?updateError";
-		}
-
-		clientService.updateClient(client.getAddress(), client.getCity(), client.getContactPerson(), client.getEmail(),  client.getMonthlyFee(), client.getName(), client.getPhone(), client.getTaxnumber(), client.getZipCode(), client.getId());
-		return "redirect:/listClinet?clientUpdateSuccess";
-	}
 	
 	@PostMapping("/deleteClient")
 	public String deleteClient(@ModelAttribute("client") Client client) {
@@ -488,5 +634,92 @@ public class HomeController {
 		return "redirect:/listClient?clientDeleteSuccess";
 	}
 
+	@RequestMapping(value = { "listTicketDev"})
+	public String listTicketDev(Model model) {
+		model.addAttribute("tickets", ticketService.findTicketsByDevGroup());
+		model.addAttribute("ticket", new Ticket());
+		model.addAttribute("roles", userService.findRolesWithoutVezetoandUgyintezo());
+		return "listTicketDev";
+	}
+	@RequestMapping(value = { "listTicketMech"})
+	public String listTicketMech(Model model) {
+		model.addAttribute("tickets", ticketService.findTicketsByMechGroup());
+		model.addAttribute("ticket", new Ticket());
+		model.addAttribute("roles", userService.findRolesWithoutVezetoandUgyintezo());
+		return "listTicketMech";
+	}
+	@RequestMapping(value = { "listTicketTest"})
+	public String listTicketTest(Model model) {
+		model.addAttribute("tickets", ticketService.findTicketsByTestGroup());
+		model.addAttribute("ticket", new Ticket());
+		model.addAttribute("roles", userService.findRolesWithoutVezetoandUgyintezo());
+		return "listTicketTest";
+	}
+	
+	 @RequestMapping("/default")
+	    public String defaultAfterLogin() {
+		
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String authenticatedUserRole = null;
+			if (principal instanceof UserDetails) {
+				authenticatedUserRole = ((UserDetailsImpl) principal).getRole();
+			} else {
+				authenticatedUserRole = principal.toString();
+			}
+			
+			
+			if (authenticatedUserRole.equals("[Vezető]")) {
+				return "redirect:/listTicket";
+			} else if (authenticatedUserRole.equals("[Ügyintéző]")) {
+				return "redirect:/listTicket";
+			} else if (authenticatedUserRole.equals("[Fejlesztő]")) {
+				return "redirect:/listTicketDev";
+			} else if (authenticatedUserRole.equals("[Szerelő]")) {
+				return "redirect:/listTicketMech";
+			} else if (authenticatedUserRole.equals("[Tesztelő]")) {
+				return "redirect:/listTicketTest";
+			} else {
+				return "Hiba";
+			}
+	 }
+	 
+	 
+	
+	 
+	 //seged fuggvenyek
+	  
+		@InitBinder
+		public void initBinder(WebDataBinder binder) {
+			binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+		}
+	  
+		private Long authenticatedUserId() {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Long authenticatedUserId = null;
+			if (principal instanceof UserDetails) {
+				authenticatedUserId = ((UserDetailsImpl) principal).getId();
+			} else {
+				authenticatedUserId = (Long) principal;
+			}
+			return authenticatedUserId;
+
+		}
+		
+		private void modifiedUserAndDate(Model model,Long id) {
+			  for (Object[] ob : ticketService.modifiedUserAndDate(id)){
+    			  if((String)ob[0]==null) {
+    		    	   model.addAttribute("modifiedName","Nem módosított");
+    		       }else {
+    		    		model.addAttribute("modifiedName",(String)ob[0]);
+    		       }
+    			  
+    		        if((Date)ob[1]==null) {	    		        
+    		        	model.addAttribute("modifiedDate","Nem módosított");
+    		        }else {	    		        	
+    		        	model.addAttribute("modifiedDate",(Date)ob[1]);
+    		        }	    	
+    		    }
+		}
+	
 
 }

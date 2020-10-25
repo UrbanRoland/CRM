@@ -26,7 +26,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name="users" )
-public class User {
+public class User extends Audit<String> {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -48,18 +48,19 @@ public class User {
 	
 	private Boolean enabled;
 	
-	@Lob
-	private byte[] image;
+	private Boolean image;
+	
 	
 
 
-	public byte[] getImage() {
+
+	public Boolean getImage() {
 		return image;
 	}
 
 
 
-	public void setImage(byte[] image) {
+	public void setImage(Boolean image) {
 		this.image = image;
 	}
 
@@ -162,13 +163,6 @@ public class User {
 
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", passwordConf=" + passwordConf
-				+ ", username=" + username + ", activation=" + activation + ", enabled=" + enabled + ", image="
-				+ Arrays.toString(image) + ", token=" + token + ", tokenCreationDate=" + tokenCreationDate + ", roles="
-				+ roles + ", tickets=" + tickets + "]";
-	}
 
 
 
@@ -226,6 +220,16 @@ public class User {
 
 	public void setTokenCreationDate(LocalDateTime date) {
 		this.tokenCreationDate = date;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", passwordConf=" + passwordConf
+				+ ", username=" + username + ", activation=" + activation + ", enabled=" + enabled + ", image=" + image
+				+ ", token=" + token + ", tokenCreationDate=" + tokenCreationDate + ", roles=" + roles + ", tickets="
+				+ tickets + "]";
 	}
 	
 	

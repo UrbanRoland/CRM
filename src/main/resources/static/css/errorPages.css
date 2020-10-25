@@ -87,7 +87,7 @@ body {
     font-size: 200px;
   }
 }
-a{
+button{
   font-family: 'Josefin Sans', sans-serif;
   font-size: 14px;
   text-decoration: none;
@@ -101,7 +101,7 @@ a{
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
- a:hover {
+ button:hover {
   color: #ffab00;
   border-color: #ffab00;
 }

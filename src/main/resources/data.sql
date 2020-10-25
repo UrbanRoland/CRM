@@ -1,25 +1,27 @@
 insert into roles(role) values('Vezető');
 insert into roles(role) values('Ügyintéző');
 insert into roles(role) values('Szerelő');
-insert into users(email,password,username,enabled) values('urolir@gmail.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland','TRUE');
+insert into roles(role) values('Fejlesztő');
+insert into roles(role) values('Tesztelő');
+insert into users(email,password,username,enabled,image) values('urolir@gmail.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(1,1);
-insert into users(email,password,username,enabled) values('urolir@gmail2.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland Nagy','TRUE');
+insert into users(email,password,username,enabled,image) values('urolir@gmail2.comm','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Roland Nagy','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(2,3);
-insert into users(email,password,username,enabled) values('Rey.Padberg@karina.biz','12345','Isaac Gilmour','TRUE');
-insert into users_roles(user_id,role_id) values(3,2);
-insert into users(email,password,username,enabled) values('6nasr_loveegy@ginsarin.ga','12345','Siyana Leal','TRUE');
-insert into users_roles(user_id,role_id) values(4,3);
-insert into users(email,password,username,enabled) values('amuhamed_shamai@sceenic.com','12345','Siyana Leal','TRUE');
-insert into users_roles(user_id,role_id) values(5,1);
-insert into users(email,password,username,enabled) values('lmdoucoure1@xvnc.netz','12345','Chloe-Ann Driscoll','TRUE');
+insert into users(email,password,username,enabled,image) values('Rey.Padberg@karina.biz','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Isaac Gilmour','TRUE','FALSE');
+insert into users_roles(user_id,role_id) values(3,4);
+insert into users(email,password,username,enabled,image) values('6nasr_loveegy@ginsarin.ga','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Siyana Leal','TRUE','FALSE');
+insert into users_roles(user_id,role_id) values(4,2);
+insert into users(email,password,username,enabled,image) values('amuhamed_shamai@sceenic.com','{bcrypt}$2a$10$pWx4lWz5WyUeomT63EYVDO9iB63EKK/nq00I8oF7n/DxfpRNBLJMS','Siyana Leal','TRUE','FALSE');
+insert into users_roles(user_id,role_id) values(5,5);
+insert into users(email,password,username,enabled,image) values('lmdoucoure1@xvnc.netz','12345','Chloe-Ann Driscoll','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(6,2);
-insert into users(email,password,username,enabled) values('phritik.raj.9022o@discovino.com','12345','Wyatt Yates','TRUE');
+insert into users(email,password,username,enabled,image) values('phritik.raj.9022o@discovino.com','12345','Wyatt Yates','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(7,3);
-insert into users(email,password,username,enabled) values('3rafael@gmailup.com','12345','Danyl Mahoney','TRUE');
+insert into users(email,password,username,enabled,image) values('3rafael@gmailup.com','12345','Danyl Mahoney','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(8,2);
-insert into users(email,password,username,enabled) values('5sami-hms@jembott.com','12345','Aliyah Rayner','TRUE');
+insert into users(email,password,username,enabled,image) values('5sami-hms@jembott.com','12345','Aliyah Rayner','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(9,2);
-insert into users(email,password,username,enabled) values('3walid.barca.180r@lolibox.ml','12345','Wyatt Yates','TRUE');
+insert into users(email,password,username,enabled,image) values('3walid.barca.180r@lolibox.ml','12345','Wyatt Yates','TRUE','FALSE');
 insert into users_roles(user_id,role_id) values(10,2);
 
 insert into client(NAME,EMAIL,PHONE,TAXNUMBER,ZIP_CODE,CITY,ADDRESS,CONTACT_PERSON,MONTHLY_FEE)
@@ -54,34 +56,42 @@ insert into client(NAME,EMAIL,PHONE,TAXNUMBER,ZIP_CODE,CITY,ADDRESS,CONTACT_PERS
 values('Hoeger LLC','Rey.Padberg@karina.biz','024-648-3804',23425892,'31428-2261','Lebsackbury','Kattie Turnpike Suite 198','Clementina DuBuque',15678);
 
 
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-12-20 10:23:19.321','2020-08-03','Nagy Ádám','Nincs internet','Normál','Nyitott','Internet hiba', 4,1);
+insert into ticket(CREATED_DATE,LAST_MODIFIED_BY,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-12-20 10:23:19.321','Rólandddd','2020-08-03','Nagy Ádám','Nincs internet','Normál','Nyitott','Internet hiba', 4,1,'FALSE');
 
 
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-03-20 10:23:19.321','2020-08-03','Nagy Ádám','Nem működik az egér','Normál','Nyitott','Egér hiba', 5,1);
+insert into ticket(CREATED_DATE,LAST_MODIFIED_BY,LAST_MODIFIED_DATE,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-03-20 10:23:19.321','Kiss Jakab','2020-08-13','2020-08-03','Nagy Ádám','Nem működik az egér','Normál','Nyitott','Egér hiba', 5,1,'FALSE');
 
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-04-06 10:23:19.321','2020-11-03','Kiss Ádám','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 7,2);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-11-19 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Extra fontos','Zárt','Monitor hiba', 6,2);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-10-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Fontos','Nyitott','Monitor hiba', 4,2);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-09-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Felfügesztett','Monitor hiba', 3,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-08-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 2,2);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-07-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 1,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-06-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 1,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-05-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Extra fontos','Nyitott','Monitor hiba', 1,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-04-20 10:23:19.321','2010-11-03','Nagy Adrián','Nem működik a monitor','Kritikus hiba','Felfügesztett','Monitor hiba', 1,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-03-20 10:23:19.321','2029-11-03','Nagy Adrián','Nem működik a monitor','Fontos','Folyamatban','Monitor hiba', 1,1);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-02-20 10:23:19.321','2020-11-03','Kiss Ádám','Nem működik a monitor','Extra fontos','Zárt','HIBA', 7,2);
-insert into ticket(CREATION_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID) 
-values('2020-01-20 10:23:19.321','2020-11-03','Kiss Ádám','Nem működik a monitor','Extra fontos','Zárt','HIBA!!!!', 2,2);
+insert into ticket(CREATED_DATE,LAST_MODIFIED_BY ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-04-06 10:23:19.321','Philip','2020-11-03','Kiss Ádám','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 7,2,'FALSE');
+insert into ticket(CREATED_DATE,LAST_MODIFIED_BY,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-11-19 10:23:19.321','asdaddsasds','2020-11-03','Nagy Adrián','Nem működik a monitor','Extra fontos','Zárt','Monitor hiba', 6,2,'FALSE');
+insert into ticket(CREATED_DATE, LAST_MODIFIED_BY,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-10-20 10:23:19.321','asdasd1212321123','2020-11-03','Nagy Adrián','Nem működik a monitor','Fontos','Nyitott','Monitor hiba', 4,2,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-09-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Felfügesztett','Monitor hiba', 3,1,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-08-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 2,2,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-07-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 1,1,'FALSE');
+insert into ticket(CREATED_DATE,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-06-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Normál','Nyitott','Monitor hiba', 1,1,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-05-20 10:23:19.321','2020-11-03','Nagy Adrián','Nem működik a monitor','Extra fontos','Nyitott','Monitor hiba', 1,1,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-04-20 10:23:19.321','2010-11-03','Nagy Adrián','Nem működik a monitor','Kritikus hiba','Felfügesztett','Monitor hiba', 1,1,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-03-20 10:23:19.321','2029-11-03','Nagy Adrián','Nem működik a monitor','Fontos','Folyamatban','Monitor hiba', 1,1,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED) 
+values('2020-02-20 10:23:19.321','2020-11-03','Kiss Ádám','Nem működik a monitor','Extra fontos','Zárt','HIBA', 7,2,'FALSE');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED,USER_GROUP) 
+values('2020-01-20 10:23:19.321','2020-11-03','Kiss Ádám','Nem működik a monitor','Extra fontos','Nyitott','HIBA!!!!', 2,2,'TRUE','Fejlesztő');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED,USER_GROUP) 
+values('2020-01-20 10:23:19.321','2020-11-03','Kiss Ádám22','Nem működik a monitor','Extra fontos','Folyamatban','HIBA2!!!!', 2,2,'TRUE','Fejlesztő');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED,USER_GROUP) 
+values('2020-05-20 10:23:19.321','2020-11-03','Kiss Ádám22','Nem működik a monitor','Extra fontos','Nyitott','HIBA44!!!!', 2,2,'TRUE','Szerelő');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED,USER_GROUP) 
+values('2020-02-20 10:23:19.321','2020-11-03','Kiss Ádám22','Nem működik a monitor','Extra fontos','Felfügesztett','HIBA2!!!!', 2,2,'TRUE','Tesztelő');
+insert into ticket(CREATED_DATE ,DEADLINE,NOTIFIER ,DESCRIPTION,PRIORITY,STATUS,TITLE ,CLIENT_ID  ,USER_ID,IS_FORWARDED,USER_GROUP) 
+values('2020-09-20 10:23:19.321','2020-11-03','Kiss Ádám22','Nem működik a monitor','Extra fontos','Folyamatban','HIBA9!!!!', 2,2,'TRUE','Tesztelő');

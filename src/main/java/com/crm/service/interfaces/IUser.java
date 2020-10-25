@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.crm.model.Role;
 import com.crm.model.User;
 
 public interface IUser {
@@ -22,13 +23,11 @@ public interface IUser {
 	
 	public String resetPassword(String token, String password);
 	
-	public void updateUserName(String username, String email);
+	public void updateUserNameAndEmail(User modifiledUser, User olderUser);
 	
-	public void updateUserPassword(String password, String passwordConf, String email);
-
-	public void addPhoto(MultipartFile file,User user) throws Exception;
+	public void updateUserPassword(User modifiledUser,User olderUser);
 	
-	public Optional<User> findById(Long id);
+	public User findById(Long id);
 	
 	public List<User> findAll();
 	
@@ -39,4 +38,11 @@ public interface IUser {
 	public void deleteUsers_Roles( Long user_id);
 	
 	public void deleteById(Long id);
+	
+	public List<String> findRolesWithoutVezetoandUgyintezo();
+	
+	public void save(User u);
+
+	public void addPhoto(MultipartFile file, User user) throws Exception;
+	
 }

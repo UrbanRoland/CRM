@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymleaf.org">
+
+
+	<li class="nav-item" sec:authorize="hasAnyAuthority('Fejlesztő')"
+		th:fragment="listTicket">
+		<div class="dropdown-el  px-5">
+			<a class="nav-link" type="radio" name="sortType" checked="checked"
+				id="sort-relevance"> <svg width="1em" height="1em"
+					viewBox="0 0 16 16" class="bi bi-clipboard iconPosition"
+					fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  					<path fill-rule="evenodd"
+						d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+	  					<path fill-rule="evenodd"
+						d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+					</svg> <span>Hibajegyek</span>
+			</a> <a href="/listTicketDev" class="nav-link linkPosition" id="sort-best">
+				<svg width="0.3em" height="0.3em" viewBox="0 0 16 16"
+					class="bi bi-circle-fill" fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg">
+	  				<circle cx="8" cy="8" r="8" />
+				</svg> <span> Listázás </span>
+			</a>
+	
+		</div>
+	</li>
+
+<li class="nav-item" sec:authorize="hasAnyAuthority('Szerelő')"
+		th:fragment="listTicket">
+		<div class="dropdown-el  px-5">
+			<a class="nav-link" type="radio" name="sortType" checked="checked"
+				id="sort-relevance"> <svg width="1em" height="1em"
+					viewBox="0 0 16 16" class="bi bi-clipboard iconPosition"
+					fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  					<path fill-rule="evenodd"
+						d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+	  					<path fill-rule="evenodd"
+						d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+					</svg> <span>Hibajegyek</span>
+			</a> <a href="/listTicketMech" class="nav-link linkPosition"
+				id="sort-best"> <svg width="0.3em" height="0.3em"
+					viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg">
+	  				<circle cx="8" cy="8" r="8" />
+				</svg> <span> Listázás </span>
+			</a>
+	
+		</div>
+	</li>
+
+
+	<li class="nav-item" sec:authorize="hasAnyAuthority('Tesztelő')"
+			th:fragment="listTicket">
+			<div class="dropdown-el  px-5">
+				<a class="nav-link" type="radio" name="sortType" checked="checked"
+					id="sort-relevance"> <svg width="1em" height="1em"
+						viewBox="0 0 16 16" class="bi bi-clipboard iconPosition"
+						fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		  					<path fill-rule="evenodd"
+							d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+		  					<path fill-rule="evenodd"
+							d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+						</svg> <span>Hibajegyek</span>
+				</a> <a href="/listTicketTest" class="nav-link linkPosition"
+					id="sort-best"> <svg width="0.3em" height="0.3em"
+						viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+		  				<circle cx="8" cy="8" r="8" />
+					</svg> <span> Listázás </span>
+				</a>
+		
+			</div>
+		</li>
+
+	<div th:fragment="messagesToUser">
+	
+	<div th:if="${param.updateUserRoleSuccess}"
+		id="updatedUserPasswordSuccess" class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A felhasználó szerepköre módosításra került!</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:if="${param.updateUserPasswordSuccess}"
+		id="updatedUserPasswordSuccess" class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A jelszava megváltozott!</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.updateProfileSuccess}" id="updateUserNameSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A felhasználó neve és az email címe módosításra került!</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:if="${param.profilePictureUploadSuccess}" id="updateUserNameSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A profilképe módosításra került!</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.clientAddSuccess}" id="clientAddSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>Az ügyfél rögzítésre került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.ticketAddSuccess}" id="ticketAddSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A hibajegy rögzítésre került!</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.updateError}" id="updateError" class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header bg-danger">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/alert.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Hiba!</h4>
+					<p>Nem sikerült módosítani az adatokon! Lehet, hogy nem töltött
+						ki minden mezőt.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.ticketUpdateSuccess}" id="ticketUpdateSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A hibajegy módosításra került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.ticketDeleteSuccess}" id="ticketDeleteSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A hibajegy törlésre került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.updateRoleError}" id="updateRoleError"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header bg-danger">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/alert.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Hiba!</h4>
+					<p>Nem sikerült módosítani a szerepkörön!.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.userDeleteSuccess}" id="userDeleteSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A felhasználó törlésre került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.clientUpdateSuccess}" id="clientUpdateSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>Az ügyfél adatai módosításra kerültek.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.clientDeleteSuccess}" id="clientDeleteSuccess"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>Az ügyfél törlésre került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.ticketForwardedSuccess}"
+		id="ticketForwardedSuccess" class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/check2-circle.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Siker!</h4>
+					<p>A hibajegy továbbításra került.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${param.ticketForwardedError}" id="ticketForwardedError"
+		class="modal fade">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header bg-danger">
+					<img class="icon img-fluid rounded mx-auto d-block"
+						src="images/icons/alert.svg">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					<h4>Hiba!</h4>
+					<p>Nem sikerült továbbítani a hibajegyet! Lehet, hogy nem
+						töltött ki minden mezőt.</p>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
+
+
+
+</html>

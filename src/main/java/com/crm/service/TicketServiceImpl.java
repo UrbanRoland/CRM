@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,6 @@ public class TicketServiceImpl implements ITicket {
 
 	}
 
-	@Override
-	public void updateTicket(String notifier, String priority, String title, String description, String status,
-			Date deadline, User user, Long id) {
-		ticketRepository.updateTicket(notifier, priority, title, description, status, deadline, user, id);
-
-	}
 
 	@Override
 	public void deleteById(Long id) {
@@ -80,4 +75,50 @@ public class TicketServiceImpl implements ITicket {
 		
 	}
 
+	@Override
+	public void updateTicketGroup(String group,boolean isForwarded, Long id) {
+	ticketRepository.updateTicketGroup(group,isForwarded,id);
+		
+	}
+
+	@Override
+	public List<Ticket> findTicketsByDevGroup() {
+		return ticketRepository.findTicketsByDevGroup();
+	}
+
+	@Override
+	public List<Ticket> findTicketsByMechGroup() {
+		return ticketRepository.findTicketsByMechGroup();
+	}
+
+	@Override
+	public List<Ticket> findTicketsByTestGroup() {
+		return ticketRepository.findTicketsByTestGroup();
+	}
+
+	@Override
+	public Optional<Ticket> findById(Long id) {
+		return ticketRepository.findById(id);
+	}
+
+	@Override
+	public void updateTicket(Ticket editedTicket, Ticket editTicket) {
+		
+		editedTicket.setTitle(editTicket.getTitle());
+		editedTicket.setDeadline(editTicket.getDeadline());
+		editedTicket.setStatus(editTicket.getStatus());
+		editedTicket.setPriority(editTicket.getPriority());
+		editedTicket.setDescription(editTicket.getDescription());
+		editedTicket.setNotifier(editTicket.getNotifier());
+		
+		ticketRepository.save(editedTicket);
+		
+	}
+
+	@Override
+	public List<Object[]> modifiedUserAndDate(Long id) {
+		return ticketRepository.modifiedUserAndDate(id);
+	}
+
+	
 }

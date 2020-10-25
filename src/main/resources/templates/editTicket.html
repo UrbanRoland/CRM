@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/main" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymleaf.org">
+
+<head>
+<title>Hibajegyek módosítása</title>
+<meta charset="UTF-8">
+	<!--===============================================================================================-->
+			<link rel="icon" type="image/svg" href="images/icons/listTicket.svg" />
+	<!--===============================================================================================-->
+		<base href="/">
+	<!--===============================================================================================-->
+
+</head>
+<body>
+
+
+	<div layout:fragment="content">
+		<div class="page-content p-5" id="content">
+			<div class="container  justify-content-center">
+				<h5 class="title">
+					<b>Hibajegy adatainak módosítása</b> 
+				
+						<a href="" data-toggle="modal" data-target="#forwardTicket" th:attrappend="data-target=${user.id}" style="color: black">
+							<span>
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+								  <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+								  <circle cx="8" cy="4.5" r="1"/>
+								</svg>
+							</span>
+						</a>	
+				</h5>
+				<div class="card">
+					<div class="card-body">
+
+						<form name="editTicket"
+							th:action="@{/editTicket/{id}(id=${editTicket.id})}"
+							th:object="${editTicket}" method="post" novalidate>
+							<div class="row">
+								<div class="col-sm" align="center">
+									<div class="form-group">
+										<label>Hiba rögzítő</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/person-fill.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control"
+												th:value="${user.username}" readonly>
+										</div>
+										<small class="form-text text-muted text-left"><a th:href="@{/userData/{id}(id=${user.id})}" 
+										style=" color: black;">Részletek</a></small>
+									</div>
+
+									<div class="form-group">
+										<label>Cím</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/card-heading.svg">
+												</div>
+											</div>
+
+											<input type="text" class="form-control" name="title"
+												id="title" th:field="*{title}" required>
+
+											<div th:if="${#fields.hasErrors('title')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{title}"></p>
+											</div>
+										</div>
+										<small th:if="${!#fields.hasErrors('title')}"
+											class="form-text text-muted text-left">Kérjük töltse ki!</small>
+									</div>
+
+									<div class="form-group">
+										<label>Határidő</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/calendar4-event.svg">
+												</div>
+											</div>
+											<input type="date" class="form-control" name="deadline"
+												th:field="*{deadline}" required>
+
+											<div th:if="${#fields.hasErrors('deadline')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{deadline}"></p>
+											</div>
+										</div>
+										<small th:if="${!#fields.hasErrors('deadline')}"
+											class="form-text text-muted text-left">Kérjük töltse ki!</small>
+									</div>
+								</div>
+								<div class="col-sm" align="center">
+
+									<div class="form-group">
+										<label>Bejelentő</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/person-bounding-box.svg">
+												</div>
+											</div>
+											<input type="text" class="form-control" name="notifier"
+												th:field="*{notifier}" required value="">
+											<div th:if="${#fields.hasErrors('notifier')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{notifier}"></p>
+											</div>
+										</div>
+										<small th:if="${!#fields.hasErrors('notifier')}"
+											class="form-text text-muted text-left">Kérjük töltse ki!</small>
+									</div>
+
+									<div class="form-group">
+										<label>Státusz</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/card-list.svg">
+												</div>
+											</div>
+											<select name="cars " id="cars" class="form-control"
+												th:field="*{status}">
+												<option th:value="${editTicket.status}"
+													th:text="${editTicket.status}" selected></option>
+												<option th:if="${editTicket.status!='Nyitott'}"
+													value="Nyitott">Nyitott</option>
+												<option th:if="${editTicket.status!='Zárt'}" value="Zárt">Zárt</option>
+												<option th:if="${editTicket.status!='Folyamatban'}"
+													value="Folyamatban">Folyamatban</option>
+												<option th:if="${editTicket.status!='Felfügesztett'}"
+													value="Felfügesztett">Felfügesztett</option>
+											</select>
+											<div th:if="${#fields.hasErrors('status')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{priority}"></p>
+											</div>
+										</div>
+										<small th:if="${!#fields.hasErrors('status')}"
+											class="form-text text-muted text-left">Kérjük töltse ki!</small>
+									</div>
+
+									<div class="form-group">
+										<label>Prioritás</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<img src="images/icons/card-checklist.svg">
+												</div>
+											</div>
+											<select name="cars " id="cars" class="form-control"
+												th:field="*{priority}">
+												<option th:value="${editTicket.priority}"
+													th:text="${editTicket.priority}" selected></option>
+												<option th:if="${editTicket.priority!='Kritikus hiba'}"
+													value="Kritikus hiba">Kritikus hiba</option>
+												<option th:if="${editTicket.priority!='Gyorsfelmérés'}"
+													value="Gyorsfelmérés">Gyorsfelmérés</option>
+												<option th:if="${editTicket.priority!='Extra fontos'}"
+													value="Extra fontos">Extra fontos</option>
+												<option th:if="${editTicket.priority!='Fontos'}"
+													value="Fontos">Fontos</option>
+												<option th:if="${editTicket.priority!='Normál'}"
+													value="Normál">Normál</option>
+											</select>
+											<div th:if="${#fields.hasErrors('priority')}"
+												class="errMessage alert alert-danger text-left" role="alert">
+												<p th:errors="*{priority}"></p>
+											</div>
+										</div>
+										<small th:if="${!#fields.hasErrors('priority')}"
+											class="form-text text-muted text-left">Kérjük töltse ki!</small>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-top: 5px;">
+								<p class="text-center">Leírás</p>
+								<textarea class="form-control" name="description"
+									style="margin-top: -5px;" rows="3" th:field="*{description}"></textarea>
+								<small th:if="${!#fields.hasErrors('description')}"
+									class="form-text text-muted text-left">Kérjük töltse ki!</small>
+								<div th:if="${#fields.hasErrors('description')}"
+									class="errMessage alert alert-danger text-left" role="alert">
+									<p th:errors="*{description}"></p>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary  btn-block">
+								<b>Mentés</b>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="forwardTicket" tabindex="-1"
+										th:attrappend="id=${user.id}"	>
+											<div class="modal-dialog modal-dialog-scrollable">									
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">
+															Utoljára módosítva</h5>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">	
+													
+														
+													<div class="col-sm" align="center">
+													<span>Utolsó módosítási dátum: <b th:text="${ modifiedDate }"></b></span>
+														<p></p>
+														<span>Utoljára módosítva: <b th:text="${ modifiedName }"></b></span>
+														<p></p>
+													</div>
+														<div class="modal-footer">
+															
+																<button type="button" class="btn btn-secondary closeModal"
+																data-dismiss="modal">Bezár</button>		
+															</div>
+																
+													</div>
+													
+													</div>
+													</div>
+													</div>
+	</div>
+</body>
+</html>

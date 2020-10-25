@@ -32,16 +32,31 @@ public class ClientServiceImpl implements IClient {
 
 
 	@Override
-	public void updateClient(String address, String city, String contactPerson, String email, Long monthlyFee,
-			String name, String phone, Long taxnumber, String zipCode, Long id) {
-		clientRepository.updateClient(address, city, contactPerson, email, monthlyFee, name, phone, taxnumber, zipCode, id);
+	public void deleteById(Long id) {
+		clientRepository.deleteById(id);
 		
 	}
 
 
 	@Override
-	public void deleteById(Long id) {
-		clientRepository.deleteById(id);
+	public Client findById(Long id) {
+		return clientRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public void updateClient(Client editedClient, Client editClient) {
+		
+		editedClient.setName(editClient.getName());
+		editedClient.setContactPerson(editClient.getContactPerson());
+		editedClient.setEmail(editClient.getEmail());
+		editedClient.setZipCode(editClient.getZipCode());
+		editedClient.setPhone(editClient.getPhone());
+		editedClient.setTaxnumber(editClient.getTaxnumber());
+		editedClient.setCity(editClient.getCity());
+		editedClient.setAddress(editClient.getAddress());
+		editedClient.setMonthlyFee(editClient.getMonthlyFee());
+		
+		clientRepository.save(editedClient);
 		
 	}
 }
