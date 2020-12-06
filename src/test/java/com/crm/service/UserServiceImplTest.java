@@ -9,10 +9,8 @@ import static org.mockito.Mockito.verify;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +24,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.crm.model.Role;
-import com.crm.model.Ticket;
 import com.crm.model.User;
 import com.crm.repository.RoleRepository;
 import com.crm.repository.UserRepository;
