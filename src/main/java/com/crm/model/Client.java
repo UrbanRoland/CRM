@@ -2,6 +2,7 @@ package com.crm.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Client {
+public class Client extends Audit<String>{
+
+	private static final long serialVersionUID = 1L;
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -30,6 +33,7 @@ public class Client {
     
     private String address;
 	
+    @Column( unique=true)
 	private String email;
 	
 	private Long taxnumber;

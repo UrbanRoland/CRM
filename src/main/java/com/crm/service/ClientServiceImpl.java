@@ -20,14 +20,14 @@ public class ClientServiceImpl implements IClient {
 	}
 	
 	
-	public void saveClient(Client client) {
-		clientRepository.save(client);
+	public Client saveClient(Client client) {
+		return clientRepository.save(client);
 		
 	}
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAll();
+		return (List<Client>) clientRepository.findAll();
 	}
 
 
@@ -44,7 +44,7 @@ public class ClientServiceImpl implements IClient {
 	}
 
 	@Override
-	public void updateClient(Client editedClient, Client editClient) {
+	public Client updateClient(Client editedClient, Client editClient) {
 		
 		editedClient.setName(editClient.getName());
 		editedClient.setContactPerson(editClient.getContactPerson());
@@ -56,7 +56,7 @@ public class ClientServiceImpl implements IClient {
 		editedClient.setAddress(editClient.getAddress());
 		editedClient.setMonthlyFee(editClient.getMonthlyFee());
 		
-		clientRepository.save(editedClient);
+		return clientRepository.save(editedClient);
 		
 	}
 }

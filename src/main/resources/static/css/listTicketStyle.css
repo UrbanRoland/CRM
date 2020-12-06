@@ -16,7 +16,10 @@ button:hover {
 	cursor: pointer;
 }
 
-
+a{color:black}
+a:hover{
+	color: black;
+}
 
 .limiter {
   width: 100%;

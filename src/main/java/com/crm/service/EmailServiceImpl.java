@@ -49,6 +49,7 @@ public class EmailServiceImpl implements IEmail {
 		System.out.println("Hiba az email küldésekor az alábbi címre: " + email + " " + e);
 		}
 	}
+	
 	@Override
 	public void sendLinkToUser(String email,String link) {
 		SimpleMailMessage message = null;

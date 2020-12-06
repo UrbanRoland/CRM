@@ -133,12 +133,12 @@ public class Ticket  extends Audit<String>{
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Ticket [id=" + id + ", client=" + client + ", notifier=" + notifier + ", priority=" + priority
-				+ ", title=" + title + ", description=" + description + ", deadline=" + deadline + ", status=" + status
-				+ ", user=" + user + ", userGroup=" + userGroup + ", isForwarded=" + isForwarded + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Ticket [id=" + id + ", client=" + client + ", notifier=" + notifier + ", priority=" + priority
+//				+ ", title=" + title + ", description=" + description + ", deadline=" + deadline + ", status=" + status
+//				+ ", user=" + user + ", userGroup=" + userGroup + ", isForwarded=" + isForwarded + "]";
+//	}
 
 
 

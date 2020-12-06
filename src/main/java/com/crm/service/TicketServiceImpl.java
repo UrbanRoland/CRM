@@ -1,10 +1,6 @@
 package com.crm.service;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +24,16 @@ public class TicketServiceImpl implements ITicket {
 
 	@Override
 	public List<Ticket> findAll() {
-		return ticketRepository.findAll();
+		return (List<Ticket>) ticketRepository.findAll();
 	}
 
 	@Override
-	public void saveTicket(Ticket ticket) {
-
-		ticketRepository.save(ticket);
-
+	public Ticket saveTicket(Ticket ticket, User u, Client client) {
+		ticket.setUser(u);
+		ticket.setStatus("Nyitott");
+		ticket.setClient(client);
+		return ticketRepository.save(ticket);
 	}
-
 
 	@Override
 	public void deleteById(Long id) {
@@ -65,35 +61,18 @@ public class TicketServiceImpl implements ITicket {
 	}
 
 	@Override
-	public List<Ticket> findTicketByClient_ID(Long client_id) {
-		return ticketRepository.findTicketByClient_ID(client_id);
-	}
-
-	@Override
 	public void deleteTicketByClient_ID(Long client_id) {
 		ticketRepository.deleteTicketByClient_ID(client_id);
 		
 	}
 
 	@Override
-	public void updateTicketGroup(String group,boolean isForwarded, Long id) {
-	ticketRepository.updateTicketGroup(group,isForwarded,id);
+	public Ticket updateTicketGroup(Long id,String group) {
+		Ticket ticket=ticketRepository.findById(id).get();
+		ticket.setForwarded(true);
+		ticket.setUserGroup(group);
+		return ticketRepository.save(ticket);
 		
-	}
-
-	@Override
-	public List<Ticket> findTicketsByDevGroup() {
-		return ticketRepository.findTicketsByDevGroup();
-	}
-
-	@Override
-	public List<Ticket> findTicketsByMechGroup() {
-		return ticketRepository.findTicketsByMechGroup();
-	}
-
-	@Override
-	public List<Ticket> findTicketsByTestGroup() {
-		return ticketRepository.findTicketsByTestGroup();
 	}
 
 	@Override
@@ -102,7 +81,7 @@ public class TicketServiceImpl implements ITicket {
 	}
 
 	@Override
-	public void updateTicket(Ticket editedTicket, Ticket editTicket) {
+	public Ticket updateTicket(Ticket editedTicket, Ticket editTicket) {
 		
 		editedTicket.setTitle(editTicket.getTitle());
 		editedTicket.setDeadline(editTicket.getDeadline());
@@ -111,13 +90,8 @@ public class TicketServiceImpl implements ITicket {
 		editedTicket.setDescription(editTicket.getDescription());
 		editedTicket.setNotifier(editTicket.getNotifier());
 		
-		ticketRepository.save(editedTicket);
+		return ticketRepository.save(editedTicket);
 		
-	}
-
-	@Override
-	public List<Object[]> modifiedUserAndDate(Long id) {
-		return ticketRepository.modifiedUserAndDate(id);
 	}
 
 	

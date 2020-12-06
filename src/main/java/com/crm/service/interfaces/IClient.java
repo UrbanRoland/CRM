@@ -7,7 +7,7 @@ import com.crm.model.Client;
 
 public interface IClient {
 	
-	public void saveClient(Client client);
+	public Client saveClient(Client client);
 	
 	public List<Client> findAll();
 		
@@ -15,5 +15,5 @@ public interface IClient {
 	
 	public Client findById(Long id);
 	
-	public void updateClient(Client editedClient, Client editClient);
+	public Client updateClient(Client editedClient, Client editClient);
 }

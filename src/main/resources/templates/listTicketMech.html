@@ -336,9 +336,10 @@
 															<label>Mely csoportnak szeretné továbbítani ezt a hibajegyet?</label>
 																<div class="input-group">
 																	<select  class="selectpicker form-control bg-white"
-																			 multiple  name="title" data-max-options="1">
-																		<option  th:value="Fejlesztő" th:text="Fejlesztő"></option>											
-																		<option  th:value="Tesztelő" th:text="Tesztelő"></option>											
+																			 multiple  name="userGroup" data-max-options="1">
+																		 <option th:each="tempRoles : ${roles}"
+																				th:value="*{tempRoles}" th:text="*{tempRoles}">
+																			</option>												
 																	</select>
 																</div>	
 														 </div>

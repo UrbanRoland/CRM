@@ -7,9 +7,10 @@
 	<!--===============================================================================================-->
 			<link rel="icon" type="image/svg" href="images/icons/listTicket.svg" />
 	<!--===============================================================================================-->
-		<base href="/">
+			<base href="/">
 	<!--===============================================================================================-->
-
+			<link rel="stylesheet" type="text/css" href="css/editTicketStyle.css">
+	<!--===============================================================================================-->
 </head>
 <body>
 
@@ -178,7 +179,7 @@
 								</div>
 							</div>
 
-							<div class="form-group" style="margin-top: 5px;">
+							<div class="form-group" >
 								<p class="text-center">Leírás</p>
 								<textarea class="form-control" name="description"
 									style="margin-top: -5px;" rows="3" th:field="*{description}"></textarea>
@@ -214,9 +215,9 @@
 													
 														
 													<div class="col-sm" align="center">
-													<span>Utolsó módosítási dátum: <b th:text="${ modifiedDate }"></b></span>
+													<span>Utolsó módosítási dátum: <b th:text="${ editTicket.lastModifiedDate }"></b></span>
 														<p></p>
-														<span>Utoljára módosítva: <b th:text="${ modifiedName }"></b></span>
+														<span>Utoljára módosítva: <b th:text="${ editTicket.lastModifiedBy }"></b></span>
 														<p></p>
 													</div>
 														<div class="modal-footer">

@@ -1,25 +1,20 @@
 package com.crm.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,11 +61,6 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	@Override
-	public List<String> allEmail() {
-		return userRepository.allEmail();
-	}
-
-	@Override
 	public void registerUser(User userToRegister) {
 		//User userCheck = userRepository.findByEmail(userToRegister.getEmail());
 
@@ -93,7 +83,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	//aktivaciohoz egy random kulcs
-	public String generateKey() {
+	private String generateKey() {
 		String key = "";
 		Random random = new Random();
 		char[] word = new char[16];
@@ -101,7 +91,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 			word[j] = (char) ('a' + random.nextInt(26));
 		}
 		String toReturn = new String(word);
-		System.out.println("Aktivációs kód: " + toReturn);
+	//	System.out.println("Aktivációs kód: " + toReturn);
 		return new String(word);
 	}
 
@@ -113,7 +103,7 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 
 		user.setEnabled(true);
 		user.setActivation("");
-		userRepository.save(user);
+		 userRepository.save(user);
 
 		return "ok";
 	}
@@ -178,24 +168,22 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	@Override
-	public void updateUserNameAndEmail(User modifiledUser, User oldUser) {
+	public User updateUserNameAndEmail(User modifiledUser, User oldUser) {
 		
 		modifiledUser.setUsername(oldUser.getUsername());
 		modifiledUser.setEmail(oldUser.getEmail());
 
-		userRepository.save(modifiledUser);
+		return userRepository.save(modifiledUser);
 		
 	}
 
 	@Override
-	public void updateUserPassword(User modifiledUser, User oldUser) {
+	public User updateUserPassword(User modifiledUser, User oldUser) {
 		
 		modifiledUser.setPassword(oldUser.getPassword());
 		modifiledUser.setPasswordConf(oldUser.getPasswordConf());
-
-		userRepository.save(modifiledUser);
-		
 		emailService.changedPassword(modifiledUser.getEmail());
+		return userRepository.save(modifiledUser);
 		
 	}
 
@@ -208,12 +196,12 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 
 	@Override
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return (List<User>) userRepository.findAll();
 	}
 
 	@Override
 	public void updateUserRole(Long user_id, Long role_id) {
-		userRepository.updateUserRole(user_id, role_id);
+		 userRepository.updateUserRole(user_id, role_id);
 		
 		
 	}
@@ -235,13 +223,8 @@ public class UserServiceImpl implements IUser, UserDetailsService {
 	}
 
 	@Override
-	public List<String> findRolesWithoutVezetoandUgyintezo() {
-		return roleRepository.findRolesWithoutVezetoandUgyintezo();
-	}
-
-	@Override
-	public void save(User u) {
-		userRepository.save(u);	
+	public User save(User u) {
+		return userRepository.save(u);	
 	}
 
 	@Override

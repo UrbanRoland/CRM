@@ -33,8 +33,7 @@
 											data-live-search="true">
 											<option value="" disabled selected>Ügyfél neve</option>
 											<option th:each="tempClient : ${client}"
-												th:value="${tempClient.getId()}"><span
-													th:text="${tempClient.name}"></span>
+												th:value="${tempClient.getId()}" th:text="${tempClient.name}">	
 											</option>
 										</select>
 									</div>
@@ -101,7 +100,7 @@
 												class="input-group-addon input-group-append input-group-text">
 												<img src="images/icons/calendar-plus-fill.svg">
 											</div>
-											<input type="text" class="dateInput form-control"
+											<input type="date" class="form-control"
 												placeholder="Határidő" th:field="*{deadline}" />
 											<div th:if="${#fields.hasErrors('deadline')}"
 												class="errMessage alert alert-danger text-left" role="alert">

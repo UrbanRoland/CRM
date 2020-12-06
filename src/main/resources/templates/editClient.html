@@ -7,9 +7,10 @@
 	<!--===============================================================================================-->
 			<link rel="icon" type="image/svg" href="images/icons/listTicket.svg" />
 	<!--===============================================================================================-->
-		<base href="/">
+			<base href="/">
 	<!--===============================================================================================-->
-
+			<link rel="stylesheet" type="text/css" href="css/editTicketStyle.css">
+	<!--===============================================================================================-->
 </head>
 <body>
 
@@ -231,7 +232,7 @@
 			</div>
 		</div>
 		
-		<!-- <div class="modal fade" id="forwardTicket" tabindex="-1"
+		<div class="modal fade" id="forwardTicket" tabindex="-1"
 										th:attrappend="id=${editClient.id}"	>
 											<div class="modal-dialog modal-dialog-scrollable">									
 												<div class="modal-content">
@@ -247,9 +248,9 @@
 													
 														
 													<div class="col-sm" align="center">
-													<span>Utolsó módosítási dátum: <b th:text="${ modifiedDate }"></b></span>
+													<span>Utolsó módosítási dátum: <b th:text="${ editClient.lastModifiedDate }"></b></span>
 														<p></p>
-														<span>Utoljára módosítva: <b th:text="${ modifiedName }"></b></span>
+														<span>Utoljára módosítva: <b th:text="${ editClient.lastModifiedBy }"></b></span>
 														<p></p>
 													</div>
 														<div class="modal-footer">
@@ -263,7 +264,7 @@
 													</div>
 													</div>
 													</div>
-													 -->
+													 
 	</div>
 </body>
 </html>

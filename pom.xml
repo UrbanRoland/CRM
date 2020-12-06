@@ -63,15 +63,15 @@
 		</dependency>
 
 		<!-- Bepitett adatbazis -->
-	<!--    <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
-			<scope>runtime</scope> </dependency>  -->
-		<!-- postgresql adatbazis -->
+<!-- 	   <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId>  -->
+<!-- 			<scope>runtime</scope> </dependency>   -->
 
+		<!-- postgresql adatbazis -->
 		 <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> 
 		 
 		<!-- JPA orm -->
 		<dependency>
@@ -103,7 +103,27 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 
-		
+	<dependency>
+		<groupId>org.assertj</groupId>
+		<artifactId>assertj-core</artifactId>
+		<version>3.11.1</version>
+		<scope>test</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>3.5.13</version>
+		<scope>test</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-junit-jupiter</artifactId>
+		<version>3.5.13</version>
+		<scope>test</scope>
+	</dependency>
+	
 		
 	</dependencies>
 
