@@ -529,10 +529,15 @@ public class HomeController {
 	public String listTicketDev(Model model) {
 		
 		List<Ticket> tickets = new ArrayList<>();
+			
+		for (Ticket ticket : ticketService.findAll()) {
+			if (ticket.getUserGroup() != null) {
+				if (ticket.getUserGroup().equals("Fejlesztő")) {
+					tickets.add(ticket);
+				}
+			}
+		}
 
-		ticketService.findAll().forEach(t -> {
-			if(t.getUserGroup().equals("Fejlesztő")) {tickets.add(t);}});
-		
 		model.addAttribute("tickets", tickets);
 		model.addAttribute("ticket", new Ticket());
 		model.addAttribute("roles", roleRepository.findAll());
@@ -544,8 +549,14 @@ public class HomeController {
 		
 		List<Ticket> tickets=new ArrayList<>();
 
-		ticketService.findAll().forEach(t -> {
-			if(t.getUserGroup().equals("Szerelő")) {tickets.add(t);}});
+		for (Ticket ticket : ticketService.findAll()) {
+			if (ticket.getUserGroup() != null) {
+				if (ticket.getUserGroup().equals("Szerelő")) {
+					tickets.add(ticket);
+				}
+			}
+		}
+
 	
 		model.addAttribute("tickets", tickets);
 		model.addAttribute("ticket", new Ticket());
@@ -558,10 +569,14 @@ public class HomeController {
 		
 		List<Ticket> tickets = new ArrayList<>();
 
-		ticketService.findAll().forEach(t -> {
-			if(t.getUserGroup().equals("Tesztelő")) {tickets.add(t);}});
-		
-	
+		for (Ticket ticket : ticketService.findAll()) {
+			if (ticket.getUserGroup() != null) {
+				if (ticket.getUserGroup().equals("Tesztelő")) {
+					tickets.add(ticket);
+				}
+			}
+		}
+
 		model.addAttribute("tickets", tickets);
 		model.addAttribute("ticket", new Ticket());
 		model.addAttribute("roles", roleRepository.findAll());
